@@ -8,6 +8,7 @@ class MovableObject {
     height = 150;
     width = 100;
     imageCache = {}; //Bilder werden zwischen gespeichert
+    currentImage = 0;
     //#endregion
 
     //#region Methoden
@@ -27,7 +28,6 @@ class MovableObject {
             img.src = path; // BIld wird geladen
             this.imageCache[path] = img; //Wert speichern als Schlüssel
         });
-
     }
     moveRight() {
         console.log('Moving-right');
