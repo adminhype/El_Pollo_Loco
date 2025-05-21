@@ -9,6 +9,7 @@ class MovableObject {
     width = 100;
     imageCache = {}; //Bilder werden zwischen gespeichert
     currentImage = 0;
+    speed = 0.2;
     //#endregion
 
     //#region Methoden
@@ -34,7 +35,9 @@ class MovableObject {
 
     }
     moveLeft() {
-
+        setInterval(() => {
+            this.x -= this.speed;
+        }, 1000 / 60)
     }
     //#endregion
 }
