@@ -15,19 +15,26 @@ class World {
         new BackgroundObject('img/5_background/layers/3_third_layer/1.png', 0),// ↓
         new BackgroundObject('img/5_background/layers/2_second_layer/1.png', 0),//↓
         new BackgroundObject('img/5_background/layers/1_first_layer/1.png', 0)// ←
-
     ]
 
     ctx; // Render-Kontext > Canvas
     canvas; // Zeichenfläche
-
+    keyboard; // empty attribute > created at some point 
     //#endregion
 
     //#region Konstruktor
-    constructor(canvas) {
+    constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d'); //Zeichenbereich > Canvas
         this.canvas = canvas; // Zeichenfläche
+        this.keyboard = keyboard; //draw area
         this.draw(); // draw wird aufgerufen
+        this.setWorld(); // for Char 
+    }
+    //#endregion
+
+    //#region Method 
+    setWorld() {
+        this.character.world = this; // this = current instance of world
     }
     //#endregion
 

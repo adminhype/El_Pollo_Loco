@@ -9,6 +9,7 @@ class Character extends MovableObject {
         `img/2_character_pepe/2_walk/W-25.png`,
         `img/2_character_pepe/2_walk/W-26.png`
     ]
+    world;
     //#endregion
 
     //#region Konstruktor Character
@@ -23,10 +24,13 @@ class Character extends MovableObject {
     //Character animieren
     animate() {
         setInterval(() => { // Endloschleife z.B alle 100ms > Charakter Bewegung
-            let i = this.currentImage % this.IMAGES_WALK.length; //modulo % > index nicht größer als Array > Bilder durchlaufen ohne manuell auf 0 zusetzen
-            let path = this.IMAGES_WALK[i]; //Pfad aus dem Array
-            this.img = this.imageCache[path]; // Greift auf loadImages() > bild ändert sich
-            this.currentImage++; // iterieren +1 > neues bild
+
+            if (this.world.keyboard.RIGHT) { //char move onkeydown to right
+                let i = this.currentImage % this.IMAGES_WALK.length; //modulo % > index nicht größer als Array > Bilder durchlaufen ohne manuell auf 0 zusetzen
+                let path = this.IMAGES_WALK[i]; //Pfad aus dem Array
+                this.img = this.imageCache[path]; // Greift auf loadImages() > bild ändert sich
+                this.currentImage++; // iterieren +1 > neues bild
+            }
         }, 100);
     }
     jump() {
