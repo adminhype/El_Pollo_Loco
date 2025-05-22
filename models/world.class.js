@@ -66,9 +66,21 @@ class World {
     }
     //#endregion
 
-    //#region canvas position hinzufügen
+    //#region canvas position hinzufügen & charachter bewegen
+    //reflect img
     addToMap(moObject) {
+        if (moObject.otherDirection) { // object has different direction y/n ? if y
+            this.ctx.save(); // status true
+            this.ctx.translate(moObject.width, 0); // reflect image 180 degree
+            this.ctx.scale(-1, 1);
+            moObject.x = moObject.x * -1;
+        }
         this.ctx.drawImage(moObject.img, moObject.x, moObject.y, moObject.width, moObject.height) // Objekt wird an seiner Position, mit eigener Größe gezeichnet
+
+        if (moObject.otherDirection) { // undo ctx > default char
+            moObject.x = moObject.x * -1;
+            this.ctx.restore();
+        }
     }
     //#endregion
 }

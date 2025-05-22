@@ -10,6 +10,7 @@ class MovableObject {
     imageCache = {}; //Bilder werden zwischen gespeichert
     currentImage = 0;
     speed = 0.2;
+    otherDirection = false; // reflect char
     //#endregion
 
     //#region Methoden
