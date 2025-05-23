@@ -36,8 +36,6 @@ document.addEventListener('keydown', (e) => {
     } if (e.keyCode == 32) { // 32 is key space
         keyboard.SPACE = true;
     }
-    console.log(e);
-
 });
 //#endregion
 
@@ -60,7 +58,5 @@ document.addEventListener('keyup', (e) => {
     } if (e.keyCode == 32) { // 32 is key space
         keyboard.SPACE = false;
     }
-    console.log(e);
-
 });
 //#endregion

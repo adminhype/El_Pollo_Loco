@@ -2,24 +2,15 @@
 class World {
     //#region Attributes
     character = new Character(); //Spielfigur
-    enemies = [ // Gegner
-        new Chicken(),
-        new Chicken(),
-        new Chicken()
-    ]
-    clouds = [ //Wolken
-        new Cloud(),
-    ]
-    backgroundObjects = [ // Hintergründe nach reihenfolge
-        new BackgroundObject('img/5_background/layers/air.png', 0),// bild und koordinaten
-        new BackgroundObject('img/5_background/layers/3_third_layer/1.png', 0),// ↓
-        new BackgroundObject('img/5_background/layers/2_second_layer/1.png', 0),//↓
-        new BackgroundObject('img/5_background/layers/1_first_layer/1.png', 0)// ←
-    ]
+    enemies = level1.enemies;
+    clouds = level1.clouds;
+    backgroundObjects = level1.backgroundObjects;
+
 
     ctx; // Render-Kontext > Canvas
     canvas; // Zeichenfläche
     keyboard; // empty attribute > created at some point 
+    camera_x = 0; // draw world > left
     //#endregion
 
     //#region Konstruktor
@@ -44,11 +35,16 @@ class World {
         // Canvas wird geleert > Geisterbilder vermeiden
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
+        this.ctx.translate(this.camera_x, 0); // draw element > 100px left ↓ all element 
+
         // this.ctx.drawImage(this.character.img, this.character.x, this.character.y, this.character.width, this.character.height);
         this.addObjectsToMap(this.backgroundObjects) //Hintergrund zuerst
         this.addToMap(this.character); // Charakter darüber
         this.addObjectsToMap(this.enemies)// Gegner im Vordergrund
         this.addObjectsToMap(this.clouds) // Wolken über alles 
+
+        this.ctx.translate(-this.camera_x, 0); // undo right > element
+
 
         //Rekursiver aufruf von draw > Endlosschleife
         let self = this;

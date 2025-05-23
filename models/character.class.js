@@ -34,6 +34,7 @@ class Character extends MovableObject {
                 this.x -= this.speed;
                 this.otherDirection = true;
             }
+            this.world.camera_x = -this.x; // camera > char > on x axies & (-this) > same char & backgroundObj
         }, 1000 / 60);
 
         setInterval(() => { // Endloschleife z.B alle 100ms > Charakter Bewegung
