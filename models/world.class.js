@@ -2,9 +2,7 @@
 class World {
     //#region Attributes
     character = new Character(); //Spielfigur
-    enemies = level1.enemies;
-    clouds = level1.clouds;
-    backgroundObjects = level1.backgroundObjects;
+    level = level1;
 
 
     ctx; // Render-Kontext > Canvas
@@ -38,10 +36,10 @@ class World {
         this.ctx.translate(this.camera_x, 0); // draw element > 100px left ↓ all element 
 
         // this.ctx.drawImage(this.character.img, this.character.x, this.character.y, this.character.width, this.character.height);
-        this.addObjectsToMap(this.backgroundObjects) //Hintergrund zuerst
+        this.addObjectsToMap(this.level.backgroundObjects) //Hintergrund zuerst
         this.addToMap(this.character); // Charakter darüber
-        this.addObjectsToMap(this.enemies)// Gegner im Vordergrund
-        this.addObjectsToMap(this.clouds) // Wolken über alles 
+        this.addObjectsToMap(this.level.enemies)// Gegner im Vordergrund
+        this.addObjectsToMap(this.level.clouds) // Wolken über alles 
 
         this.ctx.translate(-this.camera_x, 0); // undo right > element
 

@@ -26,22 +26,22 @@ class Character extends MovableObject {
     animate() {
 
         setInterval(() => {
-            if (this.world.keyboard.RIGHT) { //char move onkeydown
+            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) { // test moving right x smaller then 0
                 this.x += this.speed;
                 this.otherDirection = false;
             }
-            if (this.world.keyboard.LEFT) {
+            console.log(this.world.level.level_end_x);
+
+            if (this.world.keyboard.LEFT && this.x > 0) { // stop moving left
                 this.x -= this.speed;
                 this.otherDirection = true;
             }
-            this.world.camera_x = -this.x; // camera > char > on x axies & (-this) > same char & backgroundObj
+            this.world.camera_x = -this.x + 100; // + 100 changed start position char
         }, 1000 / 60);
 
         setInterval(() => { // Endloschleife z.B alle 100ms > Charakter Bewegung
 
             if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) { // left or right > true > shows animation
-                this.x += this.speed;
-
                 //walk animation
                 let i = this.currentImage % this.IMAGES_WALK.length; //modulo % > index nicht größer als Array > Bilder durchlaufen ohne manuell auf 0 zusetzen
                 let path = this.IMAGES_WALK[i]; //Pfad aus dem Array
