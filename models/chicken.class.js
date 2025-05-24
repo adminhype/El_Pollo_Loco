@@ -29,7 +29,7 @@ class Chicken extends MovableObject {
         this.moveLeft();
         setInterval(() => { // Endloschleife z.B alle 100ms > Charakter Bewegung
             this.playAnimation(this.IMAGES_WALK) //superclass method
-        }, 100);
+        }, 1000 / 10);
     }
     //#endregion
 }

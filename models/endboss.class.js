@@ -28,7 +28,7 @@ class Endboss extends MovableObject {
     animate() {
         setInterval(() => { // Endloschleife z.B alle 100ms > Charakter Bewegung
             this.playAnimation(this.IMAGES_WALK)
-        }, 100);
+        }, 1000 / 10);
     }
     //#endregion
 }

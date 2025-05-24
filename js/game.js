@@ -37,11 +37,7 @@ document.addEventListener('keydown', (e) => {
         keyboard.SPACE = true;
     }
 });
-//#endregion
 
-
-//#region
-// keyboard event 
 document.addEventListener('keyup', (e) => {
     if (e.keyCode == 39) { // 39 is key →
         keyboard.RIGHT = false;

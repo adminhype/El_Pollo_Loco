@@ -11,14 +11,28 @@ class MovableObject {
     currentImage = 0;
     speed = 0.2;
     otherDirection = false; // reflect char
+    speedY = 0;// how fast object moving down
+    acceleration = 2.6; //object acceleration rate
     //#endregion
 
     //#region Methoden
+
+    applyGravity() {
+        setInterval(() => {
+            if (this.isAboveGround()) { // use later > change graphics
+                this.y -= this.speedY; // y - speedY negative
+                this.speedY -= this.acceleration; // object moving down
+            }
+        }, 1000 / 25);
+    };
+
+    isAboveGround() {
+        return this.y < 180; // stop falling over y axis
+    }
     loadImage(path) {
         this.img = new Image(); // Neues Bildobjekt
         this.img.src = path;  // Bildpfad setzen > Canvas darstellung
     }
-
     /**
      * 
      * @param {Array} arr ['img./img1.png','img./img2.png','....']
@@ -33,7 +47,6 @@ class MovableObject {
     }
     moveRight() {
         console.log('Moving-right');
-
     }
     moveLeft() {
         setInterval(() => {
@@ -46,7 +59,6 @@ class MovableObject {
         this.img = this.imageCache[path]; // Greift auf loadImages() > bild ändert sich
         this.currentImage++; // iterieren +1 > neues bild
     }
-
     //#endregion
 }
 //#endregion

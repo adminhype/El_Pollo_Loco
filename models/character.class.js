@@ -2,6 +2,8 @@
 class Character extends MovableObject {
     //#region Attribut
     speed = 10; // char movement speed
+    y = 120;
+    height = 250;
     IMAGES_WALK = [
         `img/2_character_pepe/2_walk/W-21.png`,
         `img/2_character_pepe/2_walk/W-22.png`,
@@ -17,6 +19,7 @@ class Character extends MovableObject {
     constructor() {
         super().loadImage('img/2_character_pepe/2_walk/W-21.png'); //Charakter
         this.loadImages(this.IMAGES_WALK);
+        this.applyGravity();
         this.animate();
     }
     //#endregion
@@ -45,7 +48,7 @@ class Character extends MovableObject {
                 //walk animation
                 this.playAnimation(this.IMAGES_WALK)
             }
-        }, 100);
+        }, 1000 / 10);
     }
     jump() {
 
