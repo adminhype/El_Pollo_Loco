@@ -40,6 +40,13 @@ class MovableObject {
             this.x -= this.speed;
         }, 1000 / 60)
     }
+    playAnimation(images) {
+        let i = this.currentImage % this.IMAGES_WALK.length; //modulo % > index nicht größer als Array > Bilder durchlaufen ohne manuell auf 0 zusetzen
+        let path = images[i]; //Pfad aus dem Array
+        this.img = this.imageCache[path]; // Greift auf loadImages() > bild ändert sich
+        this.currentImage++; // iterieren +1 > neues bild
+    }
+
     //#endregion
 }
 //#endregion

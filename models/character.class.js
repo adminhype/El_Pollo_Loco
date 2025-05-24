@@ -43,10 +43,7 @@ class Character extends MovableObject {
 
             if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) { // left or right > true > shows animation
                 //walk animation
-                let i = this.currentImage % this.IMAGES_WALK.length; //modulo % > index nicht größer als Array > Bilder durchlaufen ohne manuell auf 0 zusetzen
-                let path = this.IMAGES_WALK[i]; //Pfad aus dem Array
-                this.img = this.imageCache[path]; // Greift auf loadImages() > bild ändert sich
-                this.currentImage++; // iterieren +1 > neues bild
+                this.playAnimation(this.IMAGES_WALK)
             }
         }, 100);
     }

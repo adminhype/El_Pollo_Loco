@@ -1,8 +1,10 @@
+//#region 
 const level1 = new Level(
     [ // Gegner
         new Chicken(),
         new Chicken(),
-        new Chicken()
+        new Chicken(),
+        new Endboss()
     ],
     [ //Wolken
         new Cloud(),
@@ -33,3 +35,4 @@ const level1 = new Level(
         new BackgroundObject('img/5_background/layers/1_first_layer/2.png', 719 * 3),// ←
     ]
 );
+//#endregion
