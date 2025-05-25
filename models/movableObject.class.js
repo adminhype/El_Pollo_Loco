@@ -19,13 +19,12 @@ class MovableObject {
 
     applyGravity() {
         setInterval(() => {
-            if (this.isAboveGround()) { // use later > change graphics
+            if (this.isAboveGround() || this.speedY > 0) { // use later > change graphics
                 this.y -= this.speedY; // y - speedY negative
                 this.speedY -= this.acceleration; // object moving down
             }
         }, 1000 / 25);
     };
-
     isAboveGround() {
         return this.y < 180; // stop falling over y axis
     }
@@ -46,12 +45,13 @@ class MovableObject {
         });
     }
     moveRight() {
-        console.log('Moving-right');
+        this.x += this.speed;
     }
     moveLeft() {
-        setInterval(() => {
-            this.x -= this.speed;
-        }, 1000 / 60)
+        this.x -= this.speed;
+    }
+    jump() {
+        this.speedY = 30; // jump height
     }
     playAnimation(images) {
         let i = this.currentImage % this.IMAGES_WALK.length; //modulo % > index nicht größer als Array > Bilder durchlaufen ohne manuell auf 0 zusetzen

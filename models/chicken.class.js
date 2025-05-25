@@ -26,7 +26,9 @@ class Chicken extends MovableObject {
     //#region Chicken Animieren Methode
     //Chicken animieren
     animate() {
-        this.moveLeft();
+        setInterval(() => {
+            this.moveLeft();
+        }, 1000 / 60)
         setInterval(() => { // Endloschleife z.B alle 100ms > Charakter Bewegung
             this.playAnimation(this.IMAGES_WALK) //superclass method
         }, 1000 / 10);

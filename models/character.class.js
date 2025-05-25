@@ -39,23 +39,27 @@ class Character extends MovableObject {
     //#region Character Animieren Methode
     //Character animieren
     animate() {
-
         setInterval(() => {
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) { // test moving right x smaller then 0
-                this.x += this.speed;
+                this.moveRight();
                 this.otherDirection = false;
-            }
-            console.log(this.world.level.level_end_x);
 
+                // this.WALKING_SOUND.play();
+            }
             if (this.world.keyboard.LEFT && this.x > 0) { // stop moving left
-                this.x -= this.speed;
+                this.moveLeft();
                 this.otherDirection = true;
+
+                // this.WALKING_SOUND.play();
+            }
+
+            if (this.world.keyboard.SPACE && !this.isAboveGround()) { // stop repeat jumping
+                this.jump(); // jump
             }
             this.world.camera_x = -this.x + 100; // + 100 changed start position char
         }, 1000 / 60);
 
         setInterval(() => { // Endloschleife z.B alle 100ms > Charakter Bewegung
-
             if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMP)
             } else {
@@ -67,7 +71,7 @@ class Character extends MovableObject {
         }, 1000 / 10);
     }
     jump() {
-
+        this.speedY = 30;
     }
     //#endregion
 }
