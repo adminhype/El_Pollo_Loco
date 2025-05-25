@@ -32,6 +32,19 @@ class MovableObject {
         this.img = new Image(); // Neues Bildobjekt
         this.img.src = path;  // Bildpfad setzen > Canvas darstellung
     }
+
+    // refector moObjecet > world.class↓
+    draw(ctx) {
+        ctx.drawImage(this.img, this.x, this.y, this.width, this.height) // Objekt wird an seiner Position, mit eigener Größe gezeichnet
+    }
+    drawFrame(ctx) {
+        ctx.beginPath();
+        ctx.lineWidth = '2';
+        ctx.strokeStyle = 'purple';
+        ctx.rect(this.x, this.y, this.width, this.height);
+        ctx.stroke();
+    }
+
     /**
      * 
      * @param {Array} arr ['img./img1.png','img./img2.png','....']
