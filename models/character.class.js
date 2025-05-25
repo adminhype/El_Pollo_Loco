@@ -43,16 +43,13 @@ class Character extends MovableObject {
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) { // test moving right x smaller then 0
                 this.moveRight();
                 this.otherDirection = false;
-
                 // this.WALKING_SOUND.play();
             }
             if (this.world.keyboard.LEFT && this.x > 0) { // stop moving left
                 this.moveLeft();
                 this.otherDirection = true;
-
                 // this.WALKING_SOUND.play();
             }
-
             if (this.world.keyboard.SPACE && !this.isAboveGround()) { // stop repeat jumping
                 this.jump(); // jump
             }

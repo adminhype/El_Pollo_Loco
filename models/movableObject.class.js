@@ -38,11 +38,14 @@ class MovableObject {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height) // Objekt wird an seiner Position, mit eigener Größe gezeichnet
     }
     drawFrame(ctx) {
-        ctx.beginPath();
-        ctx.lineWidth = '2';
-        ctx.strokeStyle = 'purple';
-        ctx.rect(this.x, this.y, this.width, this.height);
-        ctx.stroke();
+        //only show chicken and char border
+        if (this instanceof Character || this instanceof Chicken) {
+            ctx.beginPath();
+            ctx.lineWidth = '2';
+            ctx.strokeStyle = 'yellow';
+            ctx.rect(this.x, this.y, this.width, this.height);
+            ctx.stroke();
+        }
     }
 
     /**
