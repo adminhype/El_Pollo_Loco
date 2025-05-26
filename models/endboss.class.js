@@ -18,15 +18,15 @@ class Endboss extends MovableObject {
 
     //#region constructor
     constructor() {
-        super().loadImage(this.IMAGES_WALK[0]); // first images from array
-        this.loadImages(this.IMAGES_WALK); // load all
+        super().loadImage(this.IMAGES_WALK[0]);
+        this.loadImages(this.IMAGES_WALK);
         this.x = 2500;
         this.animate();
     }
     //#endregion
     //#region method
     animate() {
-        setInterval(() => { // Endloschleife z.B alle 100ms > Charakter Bewegung
+        setInterval(() => {
             this.playAnimation(this.IMAGES_WALK)
         }, 1000 / 10);
     }

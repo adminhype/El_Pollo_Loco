@@ -2,43 +2,41 @@
 class MovableObject {
 
     //#region Attribute
-    x = 120; //Startposition<
-    y = 280; //Startposition<
-    img; // Bildobjekt, das später geladen wird 
+    x = 120;
+    y = 280;
+    img;
     height = 150;
     width = 100;
-    imageCache = {}; //Bilder werden zwischen gespeichert
+    imageCache = {};
     currentImage = 0;
     speed = 0.2;
-    otherDirection = false; // reflect char
-    speedY = 0;// how fast object moving down
-    acceleration = 2.6; //object acceleration rate
+    otherDirection = false;
+    speedY = 0;
+    acceleration = 2.6;
+    energy = 100;
     //#endregion
 
     //#region Methoden
 
     applyGravity() {
         setInterval(() => {
-            if (this.isAboveGround() || this.speedY > 0) { // use later > change graphics
-                this.y -= this.speedY; // y - speedY negative
-                this.speedY -= this.acceleration; // object moving down
+            if (this.isAboveGround() || this.speedY > 0) {
+                this.y -= this.speedY;
+                this.speedY -= this.acceleration;
             }
         }, 1000 / 25);
     };
     isAboveGround() {
-        return this.y < 180; // stop falling over y axis
+        return this.y < 180;
     }
     loadImage(path) {
-        this.img = new Image(); // Neues Bildobjekt
-        this.img.src = path;  // Bildpfad setzen > Canvas darstellung
+        this.img = new Image();
+        this.img.src = path;
     }
-
-    // refector moObjecet > world.class↓
     draw(ctx) {
-        ctx.drawImage(this.img, this.x, this.y, this.width, this.height) // Objekt wird an seiner Position, mit eigener Größe gezeichnet
+        ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
     }
     drawFrame(ctx) {
-        //only show chicken and char border
         if (this instanceof Character || this instanceof Chicken) {
             ctx.beginPath();
             ctx.lineWidth = '2';
@@ -47,17 +45,22 @@ class MovableObject {
             ctx.stroke();
         }
     }
-
+    //character.isCollding(chicken);
+    isColliding(moObject) {
+        return this.x + this.width > moObject.x &&
+            this.y + this.height > moObject.y &&
+            this.x < moObject.x &&
+            this.y < moObject.y + moObject.height;
+    }
     /**
      * 
      * @param {Array} arr ['img./img1.png','img./img2.png','....']
      */
-    //imageChache
     loadImages(arr) {
         arr.forEach((path) => {
-            let img = new Image(); //Bildobject
-            img.src = path; // BIld wird geladen
-            this.imageCache[path] = img; //Wert speichern als Schlüssel
+            let img = new Image();
+            img.src = path;
+            this.imageCache[path] = img;
         });
     }
     moveRight() {
@@ -67,13 +70,13 @@ class MovableObject {
         this.x -= this.speed;
     }
     jump() {
-        this.speedY = 30; // jump height
+        this.speedY = 30;
     }
     playAnimation(images) {
-        let i = this.currentImage % this.IMAGES_WALK.length; //modulo % > index nicht größer als Array > Bilder durchlaufen ohne manuell auf 0 zusetzen
-        let path = images[i]; //Pfad aus dem Array
-        this.img = this.imageCache[path]; // Greift auf loadImages() > bild ändert sich
-        this.currentImage++; // iterieren +1 > neues bild
+        let i = this.currentImage % this.IMAGES_WALK.length;
+        let path = images[i];
+        this.img = this.imageCache[path];
+        this.currentImage++;
     }
     //#endregion
 }

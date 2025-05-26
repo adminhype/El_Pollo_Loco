@@ -1,25 +1,17 @@
 //#region Variablen
-let canvas; // Zeichenfläche global 
-let world; // Spiellogik / Objekte
-let keyboard = new Keyboard(); // instanz Keyboard
+let canvas;
+let world;
+let keyboard = new Keyboard();
 //#endregion
 
 //#region funktion über id aufrufen
 function init() {
-    canvas = document.getElementById('canvas'); // Element abrufen
-    world = new World(canvas, keyboard); // World starten und Zeichenfläche übergeben
-
-
-    console.log('my character is', world.character); // kontrolle, ob Spielfigur erstellt wurde 
-
+    canvas = document.getElementById('canvas');
+    world = new World(canvas, keyboard);
+    console.log('my character is', world.character);
 }
 //#endregion
-
-// detectin arrow key press in js
-// event > etwas passiert > json 
-
-//#region
-// keyboard event 
+//#region  keyboard event 
 document.addEventListener('keydown', (e) => {
     if (e.keyCode == 39) { // 39 is key →
         keyboard.RIGHT = true;

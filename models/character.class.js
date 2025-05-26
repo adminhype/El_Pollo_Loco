@@ -1,7 +1,7 @@
 //#region Klasse für Charakter
 class Character extends MovableObject {
     //#region Attribut
-    speed = 10; // char movement speed
+    speed = 10;
     y = 120;
     height = 250;
     IMAGES_WALK = [
@@ -28,7 +28,7 @@ class Character extends MovableObject {
 
     //#region Konstruktor Character
     constructor() {
-        super().loadImage('img/2_character_pepe/2_walk/W-21.png'); //Charakter
+        super().loadImage('img/2_character_pepe/2_walk/W-21.png');
         this.loadImages(this.IMAGES_WALK);
         this.loadImages(this.IMAGES_JUMP);
         this.applyGravity();
@@ -37,31 +37,29 @@ class Character extends MovableObject {
     //#endregion
 
     //#region Character Animieren Methode
-    //Character animieren
     animate() {
         setInterval(() => {
-            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) { // test moving right x smaller then 0
+            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
                 this.otherDirection = false;
                 // this.WALKING_SOUND.play();
             }
-            if (this.world.keyboard.LEFT && this.x > 0) { // stop moving left
+            if (this.world.keyboard.LEFT && this.x > 0) {
                 this.moveLeft();
                 this.otherDirection = true;
                 // this.WALKING_SOUND.play();
             }
-            if (this.world.keyboard.SPACE && !this.isAboveGround()) { // stop repeat jumping
-                this.jump(); // jump
+            if (this.world.keyboard.SPACE && !this.isAboveGround()) {
+                this.jump();
             }
-            this.world.camera_x = -this.x + 100; // + 100 changed start position char
+            this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
 
-        setInterval(() => { // Endloschleife z.B alle 100ms > Charakter Bewegung
+        setInterval(() => {
             if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMP)
             } else {
-                if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) { // left or right > true > shows animation
-                    //walk animation
+                if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                     this.playAnimation(this.IMAGES_WALK)
                 }
             }

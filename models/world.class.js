@@ -1,53 +1,57 @@
 //#region Klasse für Map
 class World {
     //#region Attributes
-    character = new Character(); //Spielfigur
+    character = new Character();
     level = level1;
-
-
-    ctx; // Render-Kontext > Canvas
-    canvas; // Zeichenfläche
-    keyboard; // empty attribute > created at some point 
-    camera_x = 0; // draw world > left
+    ctx;
+    canvas;
+    keyboard;
+    camera_x = 0;
     //#endregion
 
     //#region Konstruktor
     constructor(canvas, keyboard) {
-        this.ctx = canvas.getContext('2d'); //Zeichenbereich > Canvas
-        this.canvas = canvas; // Zeichenfläche
-        this.keyboard = keyboard; //draw area
-        this.draw(); // draw wird aufgerufen
-        this.setWorld(); // for Char 
+        this.ctx = canvas.getContext('2d');
+        this.canvas = canvas;
+        this.keyboard = keyboard;
+        this.draw();
+        this.setWorld();
+        this.checkCollisions();
     }
     //#endregion
 
     //#region Method 
     setWorld() {
-        this.character.world = this; // this = current instance of world
+        this.character.world = this;
+    }
+    checkCollisions() {
+        setInterval(() => {
+            this.level.enemies.forEach((enemy) => {
+                if (this.character.isColliding(enemy)) {
+                    this.character.energy -= 2;
+                    console.log('Collision with Char, energy', this.character.energy);
+                }
+            })
+        }, 1000 / 5);
     }
     //#endregion
 
     //#region Methode um Welt anzeigen zu lassen
-    // world zeichnen
     draw() {
-        // Canvas wird geleert > Geisterbilder vermeiden
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-        this.ctx.translate(this.camera_x, 0); // draw element > 100px left ↓ all element 
+        this.ctx.translate(this.camera_x, 0);
 
-        // this.ctx.drawImage(this.character.img, this.character.x, this.character.y, this.character.width, this.character.height);
-        this.addObjectsToMap(this.level.backgroundObjects) //Hintergrund zuerst
-        this.addToMap(this.character); // Charakter darüber
-        this.addObjectsToMap(this.level.enemies)// Gegner im Vordergrund
-        this.addObjectsToMap(this.level.clouds) // Wolken über alles 
+        this.addObjectsToMap(this.level.backgroundObjects)
+        this.addToMap(this.character);
+        this.addObjectsToMap(this.level.enemies)
+        this.addObjectsToMap(this.level.clouds)
 
-        this.ctx.translate(-this.camera_x, 0); // undo right > element
+        this.ctx.translate(-this.camera_x, 0);
 
-
-        //Rekursiver aufruf von draw > Endlosschleife
         let self = this;
         requestAnimationFrame(() => {
-            self.draw(); // "self" notwendig, da "this" im Arrow-Callback sonst undefiniert wäre
+            self.draw();
         });
     }
     //#endregion
@@ -55,28 +59,26 @@ class World {
     //#region Methode: mehrere Objekte auf Canvas zeichnen
     addObjectsToMap(objects) {
         objects.forEach(o => {
-            this.addToMap(o); // Jedes Objekt im Array wird einzeln ausgegeben
+            this.addToMap(o);
         })
     }
     //#endregion
 
     //#region canvas position hinzufügen & charachter bewegen
-    //reflect img
     addToMap(moObject) {
-        if (moObject.otherDirection) { // object has different direction y/n ? if y
+        if (moObject.otherDirection) {
             this.flipImage(moObject);
         }
-        moObject.draw(this.ctx); // context > draw > movable object
-        //collsion rectangle ↓
+        moObject.draw(this.ctx);
         moObject.drawFrame(this.ctx);
 
-        if (moObject.otherDirection) { // undo ctx > default char
+        if (moObject.otherDirection) {
             this.flipImageBack(moObject);
         }
     }
     flipImage(moObject) {
-        this.ctx.save(); // status true
-        this.ctx.translate(moObject.width, 0); // reflect image 180 degree
+        this.ctx.save();
+        this.ctx.translate(moObject.width, 0);
         this.ctx.scale(-1, 1);
         moObject.x = moObject.x * -1;
     }
