@@ -52,6 +52,16 @@ class MovableObject {
             this.x < moObject.x &&
             this.y < moObject.y + moObject.height;
     }
+
+    hit() { // refector hit > energy > not under zero
+        this.energy -= 2;
+        if (this.energy < 0) {
+            this.energy = 0;
+        }
+    }
+    isDead() { // object death ? 
+        return this.energy == 0; // energy 0 > death 
+    }
     /**
      * 
      * @param {Array} arr ['img./img1.png','img./img2.png','....']
