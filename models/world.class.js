@@ -20,6 +20,7 @@ class World {
     }
     //#endregion
 
+
     //#region Method 
     setWorld() {
         this.character.world = this;
