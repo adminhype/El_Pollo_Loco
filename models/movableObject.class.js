@@ -1,14 +1,7 @@
 //#region Klasse für Bewegbare Objekte
-class MovableObject {
+class MovableObject extends DrawableObject {
 
-    //#region Attribute
-    x = 120;
-    y = 280;
-    img;
-    height = 150;
-    width = 100;
-    imageCache = {};
-    currentImage = 0;
+    //#region Attribute movable objects
     speed = 0.2;
     otherDirection = false;
     speedY = 0;
@@ -30,13 +23,8 @@ class MovableObject {
     isAboveGround() {
         return this.y < 180;
     }
-    loadImage(path) {
-        this.img = new Image();
-        this.img.src = path;
-    }
-    draw(ctx) {
-        ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
-    }
+
+
     drawFrame(ctx) {
         if (this instanceof Character || this instanceof Chicken) {
             ctx.beginPath();
@@ -72,17 +60,7 @@ class MovableObject {
     isDead() { // object death ? 
         return this.energy == 0; // energy 0 > death 
     }
-    /**
-     * 
-     * @param {Array} arr ['img./img1.png','img./img2.png','....']
-     */
-    loadImages(arr) {
-        arr.forEach((path) => {
-            let img = new Image();
-            img.src = path;
-            this.imageCache[path] = img;
-        });
-    }
+
     moveRight() {
         this.x += this.speed;
     }

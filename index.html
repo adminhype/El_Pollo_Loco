@@ -14,24 +14,30 @@
     <body onload="init()">
         <h1>Loco</h1>
         <canvas id="canvas" width="720" height="480"></canvas>
-        <!-- Basic-Class -->
+        <!-- Asset-Hub -->
+        <!-- <script src="./hubs/imageHubs.js"></script> -->
+
+        <!-- Basic Classes -->
+        <script src="./models/drawable-object.class.js"></script>
         <script src="./models/movableObject.class.js"></script>
-        <!-- Subclass of MovableObject -->
+
+        <!-- Subclass from MovableObject -->
         <script src="./models/background-object.class.js"></script>
         <script src="./models/cloud.class.js"></script>
-        <!-- input event -->
-        <script src="./models/keyboard.class.js"></script>
-        <!-- Asset-Hub -->
-        <script src="./hubs/imageHubs.js"></script>
-        <!-- Sprite-Object -->
         <script src="./models/character.class.js"></script>
         <script src="./models/chicken.class.js"></script>
         <script src="./models/endboss.class.js"></script>
-        <!--world and lvl -->
+        <script src="./models/status-bar.class.js"></script>
+
+        <!-- Input-Handling -->
+        <script src="./models/keyboard.class.js"></script>
+
+        <!-- World & Level -->
         <script src="./models/world.class.js"></script>
         <script src="./models/level.class.js"></script>
         <script src="./levels/level1.js"></script>
-        <!--Game-Loop -->
+
+        <!-- Game-->
         <script src="./js/game.js"></script>
     </body>
 </html>
