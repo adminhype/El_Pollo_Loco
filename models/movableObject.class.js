@@ -14,6 +14,7 @@ class MovableObject {
     speedY = 0;
     acceleration = 2.6;
     energy = 100;
+    lastHit = 0;
     //#endregion
 
     //#region Methoden
@@ -57,7 +58,16 @@ class MovableObject {
         this.energy -= 2;
         if (this.energy < 0) {
             this.energy = 0;
+        } else {
+            this.lastHit = new Date().getTime(); // save time in numbers
         }
+    }
+    isHurt() {
+        let timepassed = new Date().getTime() - this.lastHit // diff in ms
+        timepassed = timepassed / 1000; // diff in sec
+        // console.log((timepassed));
+
+        return timepassed < 0.5; // hit under x sec
     }
     isDead() { // object death ? 
         return this.energy == 0; // energy 0 > death 
@@ -83,7 +93,7 @@ class MovableObject {
         this.speedY = 30;
     }
     playAnimation(images) {
-        let i = this.currentImage % this.IMAGES_WALK.length;
+        let i = this.currentImage % images.length;
         let path = images[i];
         this.img = this.imageCache[path];
         this.currentImage++;
