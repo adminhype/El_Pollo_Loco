@@ -13,6 +13,7 @@ function init() {
 //#endregion
 //#region  keyboard event 
 document.addEventListener('keydown', (e) => {
+
     if (e.keyCode == 39) { // 39 is key →
         keyboard.RIGHT = true;
     }
@@ -21,12 +22,15 @@ document.addEventListener('keydown', (e) => {
     }
     if (e.keyCode == 38) { // 38 is key ↑
         keyboard.UP = true;
-
-    } if (e.keyCode == 40) { // 40 is key ↓
+    }
+    if (e.keyCode == 40) { // 40 is key ↓
         keyboard.DOWN = true;
-
-    } if (e.keyCode == 32) { // 32 is key space
+    }
+    if (e.keyCode == 32) { // 32 is key space
         keyboard.SPACE = true;
+    }
+    if (e.keyCode == 70) { // 68 is key F
+        keyboard.F = true;
     }
 });
 
@@ -45,6 +49,9 @@ document.addEventListener('keyup', (e) => {
 
     } if (e.keyCode == 32) { // 32 is key space
         keyboard.SPACE = false;
+    }
+    if (e.keyCode == 70) { // 68 is key F
+        keyboard.F = false;
     }
 });
 //#endregion

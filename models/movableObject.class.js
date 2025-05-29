@@ -20,8 +20,13 @@ class MovableObject extends DrawableObject {
             }
         }, 1000 / 25);
     };
+
     isAboveGround() {
-        return this.y < 180;
+        if (this instanceof ThrowableObject) { // throwable object should alwys fall 
+            return true;
+        } else {
+            return this.y < 180;
+        }
     }
 
     //character.isCollding(chicken);

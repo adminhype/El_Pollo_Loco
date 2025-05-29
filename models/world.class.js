@@ -8,6 +8,7 @@ class World {
     keyboard;
     camera_x = 0;
     statusBar = new StatusBar();
+    throwableObjects = [];
     //#endregion
 
     //#region Konstruktor
@@ -18,23 +19,33 @@ class World {
         this.draw();
         this.setWorld();
         this.checkCollisions();
+        this.run();
     }
     //#endregion
-
 
     //#region Method 
     setWorld() {
         this.character.world = this;
     }
-    checkCollisions() {
+    run() {
         setInterval(() => {
-            this.level.enemies.forEach((enemy) => {
-                if (this.character.isColliding(enemy)) {
-                    this.character.hit();
-                    this.statusBar.setPercentage(this.character.energy);
-                }
-            })
-        }, 1000 / 5);
+            this.checkCollisions();
+            this.checkThrowObjects();
+        }, 1000 / 5)
+    }
+    checkThrowObjects() {
+        if (this.keyboard.F) { // press f > throw bottle
+            let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
+            this.throwableObjects.push(bottle);
+        }
+    }
+    checkCollisions() {
+        this.level.enemies.forEach((enemy) => {
+            if (this.character.isColliding(enemy)) {
+                this.character.hit();
+                this.statusBar.setPercentage(this.character.energy); // change statusbar on collision with enemy
+            }
+        });
     }
     //#endregion
 
@@ -43,7 +54,7 @@ class World {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         this.ctx.translate(this.camera_x, 0); // move char with camera
-        this.addObjectsToMap(this.level.backgroundObjects)
+        this.addObjectsToMap(this.level.backgroundObjects);
 
         // fix statusbar moving with char 
         this.ctx.translate(-this.camera_x, 0); // back
@@ -51,8 +62,9 @@ class World {
         this.ctx.translate(this.camera_x, 0); // forward
 
         this.addToMap(this.character);
-        this.addObjectsToMap(this.level.enemies)
-        this.addObjectsToMap(this.level.clouds)
+        this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.level.clouds);
+        this.addObjectsToMap(this.throwableObjects);
 
         this.ctx.translate(-this.camera_x, 0);
 
