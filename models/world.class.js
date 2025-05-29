@@ -31,7 +31,7 @@ class World {
             this.level.enemies.forEach((enemy) => {
                 if (this.character.isColliding(enemy)) {
                     this.character.hit();
-                    // console.log('Collision with Char, energy', this.character.energy);
+                    this.statusBar.setPercentage(this.character.energy);
                 }
             })
         }, 1000 / 5);
@@ -42,10 +42,14 @@ class World {
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-        this.ctx.translate(this.camera_x, 0);
-
+        this.ctx.translate(this.camera_x, 0); // move char with camera
         this.addObjectsToMap(this.level.backgroundObjects)
+
+        // fix statusbar moving with char 
+        this.ctx.translate(-this.camera_x, 0); // back
         this.addToMap(this.statusBar)
+        this.ctx.translate(this.camera_x, 0); // forward
+
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies)
         this.addObjectsToMap(this.level.clouds)
