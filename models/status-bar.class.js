@@ -15,7 +15,13 @@ class StatusBar extends DrawableObject {
 
     //#region constructor
     constructor() {
-        this.loadImage(this.IMAGES);
+        super(); // initialize superclass 
+        this.loadImages(this.IMAGES);
+        this.x = 40; // coordinates
+        this.y = 0;
+        this.width = 200;
+        this.height = 60;
+        this.setPercentage(100); // 10=% img > path
     }
     //#endregion
 
