@@ -1,8 +1,30 @@
+@font-face {
+    font-family: "eater";
+    src: url("./fonts/eater.ttf");
+}
+
 body {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    /* background-image: url("./assets/background_v1.jpg"); */
+    background-color: rgba(255, 166, 0, 0.238);
+    background-position: center;
+    background-size: cover;
+    font-family: "eater", sans-serif;
+}
+h1 {
+    display: flex;
+    justify-content: center;
+    font-size: 34px;
+    letter-spacing: 5px;
+    text-shadow: 4px, 4px, 12px rgba(0, 0, 0, 0.5);
 }
 canvas {
     background-color: red;
+    border-radius: 10px;
+    border: 2px solid rgb(193, 90, 6);
 }
