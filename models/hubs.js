@@ -1,4 +1,4 @@
-//#region ImageHub all Images 
+//#region Images
 class ImageHub {
     static pepe = {
         idle: [
@@ -289,7 +289,7 @@ class ImageHub {
 }
 //#endregion
 
-// //#region IntervalHub
+//#region Interval
 class IntervalHub {
     static allIntervals = [];
 
@@ -301,4 +301,8 @@ class IntervalHub {
         IntervalHub.allIntervals.forEach(clearInterval);
     }
 }
+//#endregion
+
+//#region Sounds
+
 //#endregion

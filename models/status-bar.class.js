@@ -2,7 +2,7 @@
 class StatusBar extends DrawableObject {
 
     //#region attribute
-    IMAGES = ImageHub.statusbarCoin.green;
+    IMAGES = ImageHub.statusbarHealth.green;
     percentage = 100;
     //#endregion
 

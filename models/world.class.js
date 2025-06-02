@@ -11,7 +11,7 @@ class World {
     throwableObjects = [];
     //#endregion
 
-    //#region Konstruktor
+    //#region create world
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;

@@ -29,7 +29,7 @@ document.addEventListener('keydown', (e) => {
     if (e.keyCode == 32) { // 32 is key space
         keyboard.SPACE = true;
     }
-    if (e.keyCode == 70) { // 68 is key F
+    if (e.keyCode == 70) { // 70 is key F
         keyboard.F = true;
     }
 });
@@ -50,7 +50,7 @@ document.addEventListener('keyup', (e) => {
     } if (e.keyCode == 32) { // 32 is key space
         keyboard.SPACE = false;
     }
-    if (e.keyCode == 70) { // 68 is key F
+    if (e.keyCode == 70) { // 70 is key F
         keyboard.F = false;
     }
 });

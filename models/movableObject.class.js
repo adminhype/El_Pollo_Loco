@@ -11,7 +11,6 @@ class MovableObject extends DrawableObject {
     //#endregion
 
     //#region Methoden
-
     applyGravity() {
         setInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
@@ -36,7 +35,6 @@ class MovableObject extends DrawableObject {
             this.x < moObject.x &&
             this.y < moObject.y + moObject.height;
     }
-
     hit() { // refector hit > energy > not under zero
         this.energy -= 2;
         if (this.energy < 0) {
@@ -55,7 +53,6 @@ class MovableObject extends DrawableObject {
     isDead() { // object death ? 
         return this.energy == 0; // energy 0 > death 
     }
-
     moveRight() {
         this.x += this.speed;
     }
