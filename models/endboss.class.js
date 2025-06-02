@@ -12,15 +12,14 @@ class Endboss extends MovableObject {
         super().loadImage(this.IMAGES_WALK[0]);
         this.loadImages(this.IMAGES_WALK);
         this.x = 2500;
-        this.animate();
+        IntervalHub.startInterval(this.chickenEndbossAnimation, 1000 / 10)
     }
     //#endregion
     //#region method
-    animate() {
-        setInterval(() => {
-            this.playAnimation(this.IMAGES_WALK)
-        }, 1000 / 10);
-    }
+    chickenEndbossAnimation = () => {
+        this.playAnimation(this.IMAGES_WALK)
+    };
+
     //#endregion
 }
 //#endregion

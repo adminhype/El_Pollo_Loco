@@ -4,6 +4,7 @@ class Character extends MovableObject {
     speed = 10;
     y = 120;
     height = 250;
+
     IMAGES_WALK = ImageHub.pepe.walk;
     IMAGES_JUMP = ImageHub.pepe.jump;
     IMAGES_DEAD = ImageHub.pepe.dead;
@@ -19,15 +20,12 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_HURT); // load images with array
         this.applyGravity();
-        this.animate();
+        IntervalHub.startInterval(this.charachterMovement, 1000 / 60);
+        IntervalHub.startInterval(this.characterAnimation, 1000 / 10);
     }
     //#endregion
 
     //#region Character Animieren Methode
-    animate() {
-        IntervalHub.startInterval(this.charachterMovement, 1000 / 60);
-        IntervalHub.startInterval(this.characterAnimation, 1000 / 10);
-    }
     jump() {
         this.speedY = 20;
     }

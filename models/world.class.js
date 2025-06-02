@@ -2,12 +2,14 @@
 class World {
     //#region Attributes
     character = new Character();
-    level = level1;
+    level = new Level();
     ctx;
     canvas;
     keyboard;
     camera_x = 0;
     statusBar = new StatusBar();
+    bottlBar = new BottleBar();
+    coinBar = new CoinBar();
     throwableObjects = [];
     //#endregion
 
@@ -56,10 +58,7 @@ class World {
         this.ctx.translate(this.camera_x, 0); // move char with camera
         this.addObjectsToMap(this.level.backgroundObjects);
 
-        // fix statusbar moving with char 
-        this.ctx.translate(-this.camera_x, 0); // back
-        this.addToMap(this.statusBar)
-        this.ctx.translate(this.camera_x, 0); // forward
+
 
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
@@ -68,6 +67,13 @@ class World {
 
         this.ctx.translate(-this.camera_x, 0);
 
+        // fix statusbar moving with char 
+
+        // this.ctx.translate(-this.camera_x, 0); // back
+        this.addToMap(this.statusBar);
+        this.addToMap(this.bottlBar);
+        this.addToMap(this.coinBar);
+        // this.ctx.translate(this.camera_x, 0); // forward
         let self = this;
         requestAnimationFrame(() => {
             self.draw();

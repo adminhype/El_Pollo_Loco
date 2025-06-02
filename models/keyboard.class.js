@@ -5,6 +5,6 @@ class Keyboard {
     UP = false;
     DOWN = false;
     SPACE = false;
-    F = false; // press D > throw bottle
+    F = false; // press F > throw bottle
 }
 //#endregion
