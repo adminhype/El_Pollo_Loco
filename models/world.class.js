@@ -1,6 +1,6 @@
-//#region Klasse für Map
+//#region Map
 class World {
-    //#region Attributes
+    //#region Attribute: Character, Level and Ui_Elements
     character = new Character();
     level = new Level();
     ctx;
@@ -13,7 +13,7 @@ class World {
     throwableObjects = [];
     //#endregion
 
-    //#region create world
+    //#region Create Canvas, Keyboard, initialization
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -25,7 +25,7 @@ class World {
     }
     //#endregion
 
-    //#region Method 
+    //#region Game-Logic (run, collisions, throw, ....)
     setWorld() {
         this.character.world = this;
     }
@@ -51,7 +51,7 @@ class World {
     }
     //#endregion
 
-    //#region Methode um Welt anzeigen zu lassen
+    //#region Render: World and Objects 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
@@ -83,7 +83,7 @@ class World {
     }
     //#endregion
 
-    //#region Methode: mehrere Objekte auf Canvas zeichnen
+    //#region Draw multiply Objects on Canvas
     addObjectsToMap(objects) {
         objects.forEach(o => {
             this.addToMap(o);
@@ -91,7 +91,7 @@ class World {
     }
     //#endregion
 
-    //#region canvas position hinzufügen & charachter bewegen
+    //#region Draw Object and Image Reverse
     addToMap(moObject) {
         if (moObject.otherDirection) {
             this.flipImage(moObject);

@@ -1,4 +1,4 @@
-//#region Klasse für Gegner
+//#region Chicken
 class Chicken extends MovableObject {
 
     //#region Attribute Chicken
@@ -8,7 +8,7 @@ class Chicken extends MovableObject {
     IMAGES_WALK = ImageHub.chickenNormal.walk;
     //#endregion
 
-    //#region Konstruktor 
+    //#region Constructor
     constructor() {
         super().loadImage('img/3_enemies_chicken/chicken_normal/1_walk/1_w.png');
         this.loadImages(this.IMAGES_WALK);
@@ -19,7 +19,7 @@ class Chicken extends MovableObject {
     }
     //#endregion
 
-    //#region Chicken Animieren Methode
+    //#region Chicken Animation
     moveLeft = () => {
         this.x -= this.speed;
     }

@@ -1,4 +1,4 @@
-//#region 
+//#region Boss-Enemy
 class Endboss extends MovableObject {
     //#region attributes
     height = 400;
@@ -15,7 +15,7 @@ class Endboss extends MovableObject {
         IntervalHub.startInterval(this.chickenEndbossAnimation, 1000 / 10)
     }
     //#endregion
-    //#region method
+    //#region Endboss-Animation
     chickenEndbossAnimation = () => {
         this.playAnimation(this.IMAGES_WALK)
     };

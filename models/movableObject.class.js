@@ -1,7 +1,7 @@
-//#region Klasse für Bewegbare Objekte
+//#region Movable-Objects
 class MovableObject extends DrawableObject {
 
-    //#region Attribute movable objects
+    //#region Movable-Object Attributes
     speed = 0.2;
     otherDirection = false;
     speedY = 0;
@@ -9,8 +9,10 @@ class MovableObject extends DrawableObject {
     energy = 100;
     lastHit = 0;
     //#endregion
+    //#region  Constructor
+    //#endregion
 
-    //#region Methoden
+    //#region Methods
     applyGravity() {
         setInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {

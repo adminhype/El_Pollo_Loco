@@ -1,6 +1,6 @@
-//#region class
+//#region Draw_Object
 class DrawableObject {
-    //#region static attributes
+    //#region Static Attributes
     img;
     currentImage = 0;
     imageCache = {};
@@ -13,7 +13,7 @@ class DrawableObject {
     //#region constructor
     //#endregion
 
-    //#region methods
+    //#region Images
     //loadImage('img/test.png')
     loadImage(path) {
         this.img = new Image(); // this.img = document.getElementById('image') <img id="image" src>

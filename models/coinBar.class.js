@@ -1,12 +1,12 @@
-//#region class statusbar
+//#region Statusbar
 class CoinBar extends DrawableObject {
 
-    //#region attribute
+    //#region Coin-bar Attributes
     IMAGES = ImageHub.statusbarCoin.orange;
     percentage = 100;
     //#endregion
 
-    //#region constructor
+    //#region Constructor
     constructor() {
         super(); // initialize superclass 
         this.loadImages(this.IMAGES);
@@ -18,7 +18,7 @@ class CoinBar extends DrawableObject {
     }
     //#endregion
 
-    //#region methoden
+    //#region Percent-logic and Img-selection
     setPercentage(percentage) { // use func outside with setPercenatage(50);
         this.percentage = percentage; // > between 0 and 5
         let path = this.IMAGES[this.resolveImageIndex()];

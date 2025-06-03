@@ -1,14 +1,14 @@
-//#region Klasse für Gegner
+//#region Small Cicken
 class ChickenSmall extends MovableObject {
 
-    //#region Attribute Chicken
+    //#region Attribute Small-Chicken
     y = 380;
     height = 50;
     width = 50;
     IMAGES_WALK = ImageHub.chickenSmall.walk;
     //#endregion
 
-    //#region Konstruktor 
+    //#region constructor 
     constructor() {
         super().loadImage('img/3_enemies_chicken/chicken_small/1_walk/1_w.png');
         this.loadImages(this.IMAGES_WALK);
@@ -19,7 +19,7 @@ class ChickenSmall extends MovableObject {
     }
     //#endregion
 
-    //#region Chicken Animieren Methode
+    //#region Small-Chicken Animation
     moveLeft = () => {
         this.x -= this.speed;
     }

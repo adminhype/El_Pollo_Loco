@@ -1,6 +1,6 @@
-//#region Klasse für Charakter
+//#region Character
 class Character extends MovableObject {
-    //#region Attribut
+    //#region Attribut Pepe
     speed = 10;
     y = 120;
     height = 250;
@@ -12,7 +12,7 @@ class Character extends MovableObject {
     world;
     //#endregion
 
-    //#region Konstruktor Character
+    //#region constructor
     constructor() {
         super().loadImage('img/2_character_pepe/2_walk/W-21.png');
         this.loadImages(this.IMAGES_WALK);
@@ -25,7 +25,7 @@ class Character extends MovableObject {
     }
     //#endregion
 
-    //#region Character Animieren Methode
+    //#region pepe animation
     jump() {
         this.speedY = 20;
     }

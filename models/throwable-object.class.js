@@ -1,9 +1,9 @@
-//#region bottle class
+//#region Throw-Bottle
 class ThrowableObject extends MovableObject {
     //#region attributes
     //#endregion
 
-    //#region load bottle & coordination
+    //#region Load-Bottle and Startposition
     constructor(x, y) {
         super().loadImage(`img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png`); // loadImage defin > drawableObject
         this.x = x;
@@ -15,7 +15,7 @@ class ThrowableObject extends MovableObject {
     }
     //#endregion
 
-    //#region throw bottle
+    //#region Throw Method
     throw() {
         this.speedY = 30;
         this.applyGravity();

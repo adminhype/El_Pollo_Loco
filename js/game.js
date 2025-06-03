@@ -1,17 +1,17 @@
-//#region Variablen
+//#region Initialize global game variables
 let canvas;
 let world;
 let keyboard = new Keyboard();
 //#endregion
 
-//#region funktion über id aufrufen
+//#region Get and store DOM elements (canvas).
 function init() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
     console.log('my character is', world.character);
 }
 //#endregion
-//#region  keyboard event 
+//#region Register keyboard events for gameplay.
 document.addEventListener('keydown', (e) => {
 
     if (e.keyCode == 39) { // 39 is key →

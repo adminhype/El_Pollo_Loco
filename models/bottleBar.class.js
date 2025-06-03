@@ -1,4 +1,4 @@
-//#region class statusbar
+//#region statusbar
 class BottleBar extends DrawableObject {
 
     //#region attribute
@@ -18,7 +18,7 @@ class BottleBar extends DrawableObject {
     }
     //#endregion
 
-    //#region methoden
+    //#region method percent-logic and img selection
     setPercentage(percentage) { // use func outside with setPercenatage(50);
         this.percentage = percentage; // > between 0 and 5
         let path = this.IMAGES[this.resolveImageIndex()];

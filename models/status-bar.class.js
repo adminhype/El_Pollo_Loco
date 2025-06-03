@@ -1,4 +1,4 @@
-//#region class statusbar
+//#region Statusbar
 class StatusBar extends DrawableObject {
 
     //#region attribute
@@ -6,7 +6,7 @@ class StatusBar extends DrawableObject {
     percentage = 100;
     //#endregion
 
-    //#region constructor
+    //#region Constructor
     constructor() {
         super(); // initialize superclass 
         this.loadImages(this.IMAGES);
@@ -18,7 +18,7 @@ class StatusBar extends DrawableObject {
     }
     //#endregion
 
-    //#region methoden
+    //#region Percent-Logic and Img-Section
     setPercentage(percentage) { // use func outside with setPercenatage(50);
         this.percentage = percentage; // > between 0 and 5
         let path = this.IMAGES[this.resolveImageIndex()];
