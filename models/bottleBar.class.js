@@ -4,16 +4,17 @@ class BottleBar extends DrawableObject {
     //#region attribute
     IMAGES = ImageHub.statusbarBottle.blue;
     percentage = 100;
+    x = 40; // coordinates
+    y = 40;
+    width = 200;
+    height = 60;
     //#endregion
 
     //#region constructor
     constructor() {
         super(); // initialize superclass 
         this.loadImages(this.IMAGES);
-        this.x = 40; // coordinates
-        this.y = 40;
-        this.width = 200;
-        this.height = 60;
+
         this.setPercentage(100); // 10=% img > path
     }
     //#endregion

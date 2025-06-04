@@ -10,7 +10,7 @@ body {
     flex-direction: column;
     min-height: 100vh;
     margin: 0;
-    /* background-image: url("./assets/background_v1.jpg"); */
+    background-image: url("./assets/background_imgv1.jpg");
     background-color: rgba(255, 166, 0, 0.238);
     background-position: center;
     background-size: cover;

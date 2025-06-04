@@ -2,7 +2,7 @@
 class Character extends MovableObject {
     //#region Attribut Pepe
     speed = 10;
-    y = 120;
+    y = 170;
     height = 250;
 
     IMAGES_WALK = ImageHub.pepe.walk;

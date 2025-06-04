@@ -9,6 +9,7 @@ class MovableObject extends DrawableObject {
     energy = 100;
     lastHit = 0;
     //#endregion
+
     //#region  Constructor
     //#endregion
 
@@ -26,7 +27,7 @@ class MovableObject extends DrawableObject {
         if (this instanceof ThrowableObject) { // throwable object should alwys fall 
             return true;
         } else {
-            return this.y < 180;
+            return this.y < 170;
         }
     }
 
@@ -34,7 +35,7 @@ class MovableObject extends DrawableObject {
     isColliding(moObject) {
         return this.x + this.width > moObject.x &&
             this.y + this.height > moObject.y &&
-            this.x < moObject.x &&
+            this.x < moObject.x + moObject.width &&
             this.y < moObject.y + moObject.height;
     }
     hit() { // refector hit > energy > not under zero

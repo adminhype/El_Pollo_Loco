@@ -2,6 +2,9 @@
 class Coin extends DrawableObject {
     //#endregion
     //#region Coin Attribute
+    y = 180;
+    width = 100;
+    height = 100;
     IMAGES = ImageHub.coin.coins;
     //#endregion
     //#region Constructor
@@ -10,9 +13,6 @@ class Coin extends DrawableObject {
         this.loadImage('img/8_coin/coin_1.png');
         this.x = 200 + Math.random() * 2000;
         this.speed = 0.2 + Math.random() * 0.25;
-        this.y = 180;
-        this.width = 100;
-        this.height = 100;
     }
     //#endregion
 }
