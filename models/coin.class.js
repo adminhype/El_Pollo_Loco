@@ -1,10 +1,18 @@
 //#region Coin
-class Coin extends DrawableObject {
+class Coin extends MovableObject {
     //#endregion
     //#region Coin Attribute
     y = 180;
     width = 100;
     height = 100;
+
+    offset = {
+        top: 30,
+        right: 30,
+        bottom: 30,
+        left: 30
+    };
+
     IMAGES = ImageHub.coin.coins;
     //#endregion
     //#region Constructor

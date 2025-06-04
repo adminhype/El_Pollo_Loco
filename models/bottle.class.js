@@ -1,6 +1,13 @@
 //#region Bottle-Object
-class Bottle extends DrawableObject {
+class Bottle extends MovableObject {
     //#region Bottle Attributes
+    offset = {
+        top: 10,
+        right: 10,
+        bottom: 10,
+        left: 10
+    };
+
     IMAGES = ImageHub.icons.salsaBottle;
     //#endregion
     //#region constructor

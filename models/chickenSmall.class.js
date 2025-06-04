@@ -5,6 +5,14 @@ class ChickenSmall extends MovableObject {
     y = 380;
     height = 50;
     width = 50;
+
+    offset = {
+        top: 15,
+        right: 10,
+        bottom: 20,
+        left: 10
+    };
+
     IMAGES_WALK = ImageHub.chickenSmall.walk;
     //#endregion
 

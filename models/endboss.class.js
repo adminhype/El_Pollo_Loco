@@ -4,6 +4,14 @@ class Endboss extends MovableObject {
     height = 400;
     width = 250;
     y = 50;
+
+    offset = {
+        top: 60,
+        right: 30,
+        bottom: 30,
+        left: 30
+    };
+
     IMAGES_WALK = ImageHub.enemieBossChicken.walk;
     //#endregion
 

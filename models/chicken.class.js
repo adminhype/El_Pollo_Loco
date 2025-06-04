@@ -5,7 +5,16 @@ class Chicken extends MovableObject {
     y = 360;
     height = 70;
     width = 70;
+
+    offset = {
+        top: 10,
+        right: 5,
+        bottom: 10,
+        left: 5
+    };
+
     IMAGES_WALK = ImageHub.chickenNormal.walk;
+
     //#endregion
 
     //#region Constructor

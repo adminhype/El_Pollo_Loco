@@ -5,6 +5,13 @@ class Character extends MovableObject {
     y = 170;
     height = 250;
 
+    offset = {
+        top: 100,
+        right: 30,
+        bottom: 10,
+        left: 30
+    };
+
     IMAGES_WALK = ImageHub.pepe.walk;
     IMAGES_JUMP = ImageHub.pepe.jump;
     IMAGES_DEAD = ImageHub.pepe.dead;

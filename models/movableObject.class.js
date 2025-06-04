@@ -8,12 +8,45 @@ class MovableObject extends DrawableObject {
     acceleration = 2.6;
     energy = 100;
     lastHit = 0;
+    offset = {
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0
+    };
+    rX; // x coodinate hitbox
+    rY; // y coordinate hitbox
+    rW; // width hitbox
+    rH; // height hitbox
+
     //#endregion
 
     //#region  Constructor
+    constructor() {
+        super();
+    }
+
     //#endregion
 
     //#region Methods
+
+    getRealFrame() {
+        this.rX = this.x + this.offset.left;
+        this.rY = this.y + this.offset.top;
+        this.rW = this.width - this.offset.left - this.offset.right;
+        this.rH = this.height - this.offset.top - this.offset.bottom;
+    }
+    //character.isCollding(chicken);
+    isColliding(moObject) {
+        this.getRealFrame();
+        moObject.getRealFrame();
+
+        return this.rX + this.rW > moObject.rX &&
+            this.rY + this.rH > moObject.rY &&
+            this.rX < moObject.rX + moObject.rW &&
+            this.rY < moObject.rY + moObject.rH;
+    }
+
     applyGravity() {
         setInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
@@ -29,14 +62,6 @@ class MovableObject extends DrawableObject {
         } else {
             return this.y < 170;
         }
-    }
-
-    //character.isCollding(chicken);
-    isColliding(moObject) {
-        return this.x + this.width > moObject.x &&
-            this.y + this.height > moObject.y &&
-            this.x < moObject.x + moObject.width &&
-            this.y < moObject.y + moObject.height;
     }
     hit() { // refector hit > energy > not under zero
         this.energy -= 2;
