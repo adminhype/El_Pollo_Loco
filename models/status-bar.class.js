@@ -1,6 +1,5 @@
 //#region Statusbar
 class StatusBar extends DrawableObject {
-
     //#region attribute
     IMAGES = ImageHub.statusbarHealth.green;
     percentage = 100;
@@ -40,7 +39,6 @@ class StatusBar extends DrawableObject {
         }
     }
     //#endregion
-
 }
 //#endregion
 

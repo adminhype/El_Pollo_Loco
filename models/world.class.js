@@ -57,18 +57,13 @@ class World {
 
         this.ctx.translate(this.camera_x, 0); // move char with camera
         this.addObjectsToMap(this.level.backgroundObjects);
-
-
-
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.throwableObjects);
         this.addObjectsToMap(this.level.salsaBottles);
         this.addObjectsToMap(this.level.coins);
-
         this.ctx.translate(-this.camera_x, 0);
-
         // fix statusbar moving with char 
 
         // this.ctx.translate(-this.camera_x, 0); // back

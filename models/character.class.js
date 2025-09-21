@@ -2,7 +2,7 @@
 class Character extends MovableObject {
     //#region Attribut Pepe
     speed = 10;
-    y = 170;
+    y = 120;
     height = 250;
 
     offset = {

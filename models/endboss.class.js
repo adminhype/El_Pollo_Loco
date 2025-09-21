@@ -27,7 +27,6 @@ class Endboss extends MovableObject {
     chickenEndbossAnimation = () => {
         this.playAnimation(this.IMAGES_WALK)
     };
-
     //#endregion
 }
 //#endregion

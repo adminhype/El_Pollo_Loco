@@ -1,6 +1,7 @@
 //#region Coin
 class Coin extends MovableObject {
     //#endregion
+
     //#region Coin Attribute
     y = 180;
     width = 100;
@@ -15,6 +16,7 @@ class Coin extends MovableObject {
 
     IMAGES = ImageHub.coin.coins;
     //#endregion
+
     //#region Constructor
     constructor() {
         super();

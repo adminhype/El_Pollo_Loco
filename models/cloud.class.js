@@ -6,6 +6,7 @@ class Cloud extends MovableObject {
     width = 500;
     speed = 0.2;
     //#endregion
+
     //#region Constructor
     constructor() {
         super().loadImage('img/5_background/layers/4_clouds/1.png');

@@ -1,8 +1,5 @@
 //#region Throw-Bottle
 class ThrowableObject extends MovableObject {
-    //#region attributes
-    //#endregion
-
     //#region Load-Bottle and Startposition
     constructor(x, y) {
         super().loadImage(`img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png`); // loadImage defin > drawableObject

@@ -299,10 +299,10 @@ class IntervalHub {
     }
     static stopAllIntervals() {
         IntervalHub.allIntervals.forEach(clearInterval);
+        IntervalHub.allIntervals = [];
     }
 }
 //#endregion
 
 //#region Sounds
-
 //#endregion

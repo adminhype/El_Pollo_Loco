@@ -1,6 +1,5 @@
 //#region Statusbar
 class CoinBar extends DrawableObject {
-
     //#region Coin-bar Attributes
     IMAGES = ImageHub.statusbarCoin.orange;
     percentage = 100;
@@ -40,7 +39,6 @@ class CoinBar extends DrawableObject {
         }
     }
     //#endregion
-
 }
 //#endregion
 

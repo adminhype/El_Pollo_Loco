@@ -10,9 +10,6 @@ class DrawableObject {
     width = 100;
     //#endregion
 
-    //#region constructor
-    //#endregion
-
     //#region Images
     //loadImage('img/test.png')
     loadImage(path) {
@@ -31,8 +28,6 @@ class DrawableObject {
             this instanceof Endboss ||
             this instanceof Coin ||
             this instanceof Bottle)) { // show border for collision
-
-
             this.getRealFrame(); // get real frame for collision
             ctx.beginPath();
             ctx.lineWidth = '2';
@@ -54,5 +49,4 @@ class DrawableObject {
     }
     //#endregion
 }
-
 //#endregion

@@ -1,6 +1,5 @@
 //#region Movable-Objects
 class MovableObject extends DrawableObject {
-
     //#region Movable-Object Attributes
     speed = 0.2;
     otherDirection = false;
@@ -8,6 +7,7 @@ class MovableObject extends DrawableObject {
     acceleration = 2.6;
     energy = 100;
     lastHit = 0;
+
     offset = {
         top: 0,
         bottom: 0,
@@ -18,18 +18,15 @@ class MovableObject extends DrawableObject {
     rY; // y coordinate hitbox
     rW; // width hitbox
     rH; // height hitbox
-
     //#endregion
 
     //#region  Constructor
     constructor() {
         super();
     }
-
     //#endregion
 
     //#region Methods
-
     getRealFrame() {
         this.rX = this.x + this.offset.left;
         this.rY = this.y + this.offset.top;
@@ -38,9 +35,8 @@ class MovableObject extends DrawableObject {
     }
     //character.isCollding(chicken);
     isColliding(moObject) {
-        this.getRealFrame();
-        moObject.getRealFrame();
-
+        // this.getRealFrame();
+        // moObject.getRealFrame();
         return this.rX + this.rW > moObject.rX &&
             this.rY + this.rH > moObject.rY &&
             this.rX < moObject.rX + moObject.rW &&
@@ -60,7 +56,7 @@ class MovableObject extends DrawableObject {
         if (this instanceof ThrowableObject) { // throwable object should alwys fall 
             return true;
         } else {
-            return this.y < 170;
+            return this.y < 180;
         }
     }
     hit() { // refector hit > energy > not under zero
@@ -75,7 +71,6 @@ class MovableObject extends DrawableObject {
         let timepassed = new Date().getTime() - this.lastHit // diff in ms
         timepassed = timepassed / 1000; // diff in sec
         // console.log((timepassed));
-
         return timepassed < 0.5; // hit under x sec
     }
     isDead() { // object death ? 

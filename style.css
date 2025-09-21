@@ -21,7 +21,8 @@ h1 {
     justify-content: center;
     font-size: 34px;
     letter-spacing: 5px;
-    text-shadow: 4px, 4px, 12px rgba(0, 0, 0, 0.5);
+    text-shadow: 4px, 4px, 12px rgba(255, 0, 0, 0.5);
+    color: green;
 }
 canvas {
     background-color: red;

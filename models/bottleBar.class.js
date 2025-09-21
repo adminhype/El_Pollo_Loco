@@ -1,6 +1,5 @@
 //#region statusbar
 class BottleBar extends DrawableObject {
-
     //#region attribute
     IMAGES = ImageHub.statusbarBottle.blue;
     percentage = 100;
