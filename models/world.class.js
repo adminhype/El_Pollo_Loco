@@ -11,6 +11,8 @@ class World {
     bottlBar = new BottleBar();
     coinBar = new CoinBar();
     throwableObjects = [];
+    collectedBottles = [];
+    collectedCoins = [];
     //#endregion
 
     //#region Create Canvas, Keyboard, initialization
@@ -36,6 +38,7 @@ class World {
         }, 1000 / 5)
     }
     checkThrowObjects() {
+        if (this.character.isSleeping()) return;
         if (this.keyboard.F && this.bottlBar.percentage > 0) {
             let offsetX = this.character.width - 20;
             let offsetY = this.character.height / 2;
@@ -59,9 +62,16 @@ class World {
         });
         this.level.salsaBottles.forEach((bottle, index) => {
             if (this.character.isColliding(bottle)) {
-                console.log("Bottle aufgesammelt!");
+                this.collectedBottles.push(bottle); //show items for end screen
                 this.level.salsaBottles.splice(index, 1);
-                this.bottlBar.setPercentage(this.bottlBar.percentage + 20);
+                this.bottlBar.setPercentage(Math.min(100, this.bottlBar.percentage + 20));
+            }
+        });
+        this.level.coins.forEach((coin, index) => {
+            if (this.character.isColliding(coin)) {
+                this.collectedCoins.push(coin);
+                this.level.coins.splice(index, 1);
+                this.coinBar.setPercentage(Math.min(100, this.coinBar.percentage + 20));
             }
         });
     }
@@ -99,6 +109,9 @@ class World {
         objects.forEach(obj => {
             if (obj instanceof ThrowableObject) {
                 obj.update();
+                obj.animate();
+            }
+            if (obj instanceof Coin) {
                 obj.animate();
             }
             this.addToMap(obj);
