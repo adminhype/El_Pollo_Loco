@@ -35,8 +35,8 @@ class MovableObject extends DrawableObject {
     }
     //character.isCollding(chicken);
     isColliding(moObject) {
-        // this.getRealFrame();
-        // moObject.getRealFrame();
+        this.getRealFrame();
+        moObject.getRealFrame();
         return this.rX + this.rW > moObject.rX &&
             this.rY + this.rH > moObject.rY &&
             this.rX < moObject.rX + moObject.rW &&
@@ -60,7 +60,7 @@ class MovableObject extends DrawableObject {
         }
     }
     hit() { // refector hit > energy > not under zero
-        this.energy -= 2;
+        this.energy -= 20;
         if (this.energy < 0) {
             this.energy = 0;
         } else {
