@@ -1,25 +1,53 @@
 //#region Throw-Bottle
 class ThrowableObject extends MovableObject {
     //#region Load-Bottle and Startposition
-    constructor(x, y) {
-        super().loadImage(`img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png`); // loadImage defin > drawableObject
+    constructor(x, y, otherDirection) {
+        super().loadImage(ImageHub.bottleSplash.rotation[0]);
         this.x = x;
         this.y = y;
         this.height = 60;
         this.width = 40;
-        this.throw();
 
-    }
-    //#endregion
+        this.loadImages(ImageHub.bottleSplash.rotation);
+        this.loadImages(ImageHub.bottleSplash.splash);
 
-    //#region Throw Method
-    throw() {
-        this.speedY = 30;
+        this.isBroken = false;
+        this.speedY = 20;
+        this.speedX = 6;
         this.applyGravity();
-        setInterval(() => {
-            this.x += 10;
-        }, 1000 / 25)
+
+        this.currentFrame = 0;
+        this.frameCounter = 0;
+
     }
     //#endregion
+    update() {
+        if (this.isBroken) return;
+        this.x += this.speedX;
+        if (this.y >= 380) {
+            this.breakBottle();
+        }
+    }
+
+    animate() {
+        if (!this.isBroken) {
+            if (this.frameCounter % 4 === 0) {
+                this.playAnimation(ImageHub.bottleSplash.rotation);
+            }
+        } else {
+            if (this.currentFrame < ImageHub.bottleSplash.splash.length) {
+                this.loadImage(ImageHub.bottleSplash.splash[this.currentFrame]);
+                this.currentFrame++;
+            }
+        }
+        this.frameCounter++;
+    }
+
+    breakBottle() {
+        this.isBroken = true;
+        this.speedY = 0;
+        this.y = 380;
+        this.currentFrame = 0;
+    }
 }
 //#endregion

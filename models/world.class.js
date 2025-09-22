@@ -36,16 +36,32 @@ class World {
         }, 1000 / 5)
     }
     checkThrowObjects() {
-        if (this.keyboard.F) { // press f > throw bottle
-            let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
+        if (this.keyboard.F && this.bottlBar.percentage > 0) {
+            let offsetX = this.character.width - 20;
+            let offsetY = this.character.height / 2;
+
+            let bottle = new ThrowableObject(
+                this.character.x + offsetX,
+                this.character.y + offsetY,
+            );
+
             this.throwableObjects.push(bottle);
+            this.bottlBar.setPercentage(this.bottlBar.percentage - 20);
         }
     }
+
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy) && !this.character.isHurt()) {
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy); // change statusbar on collision with enemy
+            }
+        });
+        this.level.salsaBottles.forEach((bottle, index) => {
+            if (this.character.isColliding(bottle)) {
+                console.log("Bottle aufgesammelt!");
+                this.level.salsaBottles.splice(index, 1);
+                this.bottlBar.setPercentage(this.bottlBar.percentage + 20);
             }
         });
     }
@@ -80,8 +96,12 @@ class World {
 
     //#region Draw multiply Objects on Canvas
     addObjectsToMap(objects) {
-        objects.forEach(o => {
-            this.addToMap(o);
+        objects.forEach(obj => {
+            if (obj instanceof ThrowableObject) {
+                obj.update();
+                obj.animate();
+            }
+            this.addToMap(obj);
         })
     }
     //#endregion
