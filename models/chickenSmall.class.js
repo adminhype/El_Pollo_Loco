@@ -21,18 +21,21 @@ class ChickenSmall extends MovableObject {
         this.loadImages(this.IMAGES_WALK);
         this.x = 200 + Math.random() * 2000;
         this.speed = 0.2 + Math.random() * 0.25;
-        IntervalHub.startInterval(this.moveLeft, 1000 / 60);
-        IntervalHub.startInterval(this.chickenSmallAnimation, 1000 / 10);
+
+        this.animationCounter = 0;
+        this.animationSpeed = 10;
     }
     //#endregion
 
     //#region Small-Chicken Animation
-    moveLeft = () => {
-        this.x -= this.speed;
+    moveStep = () => {
+        // this.x -= this.speed;
     }
-    chickenSmallAnimation = () => {
-        this.playAnimation(this.IMAGES_WALK)
-
+    animateStep = () => {
+        this.animationCounter++;
+        if (this.animationCounter % this.animationSpeed === 0) {
+            this.playAnimation(this.IMAGES_WALK);
+        }
     }
 }
 //#endregion

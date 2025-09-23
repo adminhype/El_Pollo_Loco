@@ -19,7 +19,16 @@ class Level {
         new ChickenSmall(),
         new Endboss()
     ];
-    clouds = [ //Wolken
+    clouds = [
+        new Cloud(),
+        new Cloud(),
+        new Cloud(),
+        new Cloud(),
+        new Cloud(),
+        new Cloud(),
+        new Cloud(),
+        new Cloud(),
+        new Cloud(),
         new Cloud(),
     ];
     backgroundObjects = [ // Hintergründe nach reihenfolge
@@ -47,23 +56,18 @@ class Level {
         new BackgroundObject('img/5_background/layers/2_second_layer/2.png', 719 * 3),//↓
         new BackgroundObject('img/5_background/layers/1_first_layer/2.png', 719 * 3),// ←
     ];
-    salsaBottles = [
-        new Bottle(),
-        new Bottle(),
-        new Bottle(),
-        new Bottle(),
-        new Bottle(),
-        new Bottle(),
-        new Bottle()
-    ];
-    coins = [
-        new Coin(),
-        new Coin(),
-        new Coin(),
-        new Coin(),
-        new Coin(),
-        new Coin()
-    ]
+    salsaBottles = [];
+    coins = [];
+
+    constructor(bottleCount = 1000, coinCount = 5) {
+        for (let i = 0; i < bottleCount; i++) {
+            this.salsaBottles.push(new Bottle());
+        }
+
+        for (let i = 0; i < coinCount; i++) {
+            this.coins.push(new Coin());
+        }
+    }
     //#endregion
 }
 //#endregion

@@ -1,7 +1,7 @@
 //#region Throw-Bottle
 class ThrowableObject extends MovableObject {
     //#region Load-Bottle and Startposition
-    constructor(x, y, otherDirection) {
+    constructor(x, y) {
         super().loadImage(ImageHub.bottleSplash.rotation[0]);
         this.x = x;
         this.y = y;
@@ -14,8 +14,8 @@ class ThrowableObject extends MovableObject {
         this.isBroken = false;
         this.speedY = 20;
         this.speedX = 6;
-        this.applyGravity();
-
+        this.acceleration = 1;
+        this.animationSpeed = 4;
         this.currentFrame = 0;
         this.frameCounter = 0;
 
@@ -24,6 +24,8 @@ class ThrowableObject extends MovableObject {
     update() {
         if (this.isBroken) return;
         this.x += this.speedX;
+        this.y -= this.speedY;
+        this.speedY -= this.acceleration;
         if (this.y >= 380) {
             this.breakBottle();
         }

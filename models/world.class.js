@@ -20,22 +20,15 @@ class World {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
-        this.draw();
         this.setWorld();
+        this.draw();
         this.checkCollisions();
-        this.run();
     }
     //#endregion
 
     //#region Game-Logic (run, collisions, throw, ....)
     setWorld() {
         this.character.world = this;
-    }
-    run() {
-        setInterval(() => {
-            this.checkCollisions();
-            this.checkThrowObjects();
-        }, 1000 / 5)
     }
     checkThrowObjects() {
         if (this.character.isSleeping()) return;
@@ -97,13 +90,26 @@ class World {
         this.addToMap(this.bottlBar);
         this.addToMap(this.coinBar);
         // this.ctx.translate(this.camera_x, 0); // forward
+        this.update();
         let self = this;
         requestAnimationFrame(() => {
             self.draw();
         });
     }
     //#endregion
+    update() {
+        this.checkCollisions();
+        this.checkThrowObjects();
 
+        this.character.applyGravity();
+        this.character.characterMovement();
+        this.character.characterAnimation();
+        this.level.enemies.forEach(enemy => {
+            if (enemy.moveStep) enemy.moveStep();
+            if (enemy.animateStep) enemy.animateStep();
+        });
+        this.throwableObjects.forEach(obj => obj.update());
+    }
     //#region Draw multiply Objects on Canvas
     addObjectsToMap(objects) {
         objects.forEach(obj => {

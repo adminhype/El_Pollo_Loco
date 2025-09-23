@@ -33,9 +33,9 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_HURT); // load images with array
         this.loadImages(this.IMAGES_SLEEP);
-        this.applyGravity();
-        IntervalHub.startInterval(this.charachterMovement, 1000 / 60);
-        IntervalHub.startInterval(this.characterAnimation, 1000 / 10);
+
+        this.animationSpeed = 8;
+        this.animationCounter = 0;
     }
     //#endregion
     getNow() {
@@ -46,7 +46,7 @@ class Character extends MovableObject {
     jump() {
         this.speedY = 25;
     }
-    charachterMovement = () => {
+    characterMovement() {
         let moved = false;
 
         if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
@@ -68,19 +68,24 @@ class Character extends MovableObject {
         if (moved) this.lastAction = this.getNow();
         this.world.camera_x = -this.x + 100;
     }
-
-    characterAnimation = () => {
+    characterAnimation() {
+        this.animationCounter++;
         if (this.isDead()) {
-            this.playAnimation(this.IMAGES_DEAD);
+            this.playWithDelay(this.IMAGES_DEAD);
         } else if (this.isHurt()) {
-            this.playAnimation(this.IMAGES_HURT);
+            this.playWithDelay(this.IMAGES_HURT);
         } else if (this.isAboveGround()) {
             this.playJumpAnimation();
         } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-            this.playAnimation(this.IMAGES_WALK);
+            this.playWithDelay(this.IMAGES_WALK);
         } else {
-            if (this.isSleeping()) this.playAnimation(this.IMAGES_SLEEP);
-            else this.playAnimation(this.IMAGES_IDLE);
+            if (this.isSleeping()) this.playWithDelay(this.IMAGES_SLEEP);
+            else this.playWithDelay(this.IMAGES_IDLE);
+        }
+    }
+    playWithDelay(images) {
+        if (this.animationCounter % this.animationSpeed === 0) {
+            this.playAnimation(images);
         }
     }
     playJumpAnimation() {

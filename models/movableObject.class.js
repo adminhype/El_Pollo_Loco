@@ -4,7 +4,7 @@ class MovableObject extends DrawableObject {
     speed = 0.2;
     otherDirection = false;
     speedY = 0;
-    acceleration = 2.6;
+    acceleration = 2.3;
     energy = 1000;
     lastHit = 0;
 
@@ -42,15 +42,12 @@ class MovableObject extends DrawableObject {
             this.rX < moObject.rX + moObject.rW &&
             this.rY < moObject.rY + moObject.rH;
     }
-
     applyGravity() {
-        setInterval(() => {
-            if (this.isAboveGround() || this.speedY > 0) {
-                this.y -= this.speedY;
-                this.speedY -= this.acceleration;
-            }
-        }, 1000 / 25);
-    };
+        if (this.isAboveGround() || this.speedY > 0) {
+            this.y -= this.speedY;
+            this.speedY -= this.acceleration;
+        }
+    }
 
     isAboveGround() {
         if (this instanceof ThrowableObject) { // throwable object should alwys fall 
@@ -83,7 +80,7 @@ class MovableObject extends DrawableObject {
         this.x -= this.speed;
     }
     jump() {
-        this.speedY = 30;
+        this.speedY = 18;
     }
     playAnimation(images) {
         let i = this.currentImage % images.length;
