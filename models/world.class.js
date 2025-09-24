@@ -67,6 +67,14 @@ class World {
                 this.coinBar.setPercentage(Math.min(100, this.coinBar.percentage + 20));
             }
         });
+        this.throwableObjects.forEach((bottle, i) => {
+            this.level.enemies.forEach((enemy, j) => {
+                if (bottle.isColliding(enemy) && !enemy.isDead) {
+                    enemy.die();
+                    this.throwableObjects.splice(i, 1);
+                }
+            });
+        });
     }
     //#endregion
 
@@ -108,6 +116,7 @@ class World {
             if (enemy.moveStep) enemy.moveStep();
             if (enemy.animateStep) enemy.animateStep();
         });
+        this.level.enemies = this.level.enemies.filter(e => !e.markedForDeletion);
         this.throwableObjects.forEach(obj => obj.update());
     }
     //#region Draw multiply Objects on Canvas
