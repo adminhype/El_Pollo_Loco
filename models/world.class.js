@@ -62,6 +62,7 @@ class World {
             if (!this.character.isColliding(enemy) || enemy.isDead) return;
             const feet = this.character.y + this.character.height;
             const stomp = this.character.speedY < 0 && feet <= enemy.y + enemy.height;
+
             if (stomp) {
                 enemy.die();
             } else if (!this.character.isHurt()) {
@@ -111,12 +112,12 @@ class World {
         this.ctx.save();
         this.ctx.translate(this.camera_x, 0); // move char with camera
         this.addObjectsToMap(this.level.backgroundObjects);
-        this.addToMap(this.character);
-        this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.throwableObjects);
         this.addObjectsToMap(this.level.salsaBottles);
         this.addObjectsToMap(this.level.coins);
+        this.addObjectsToMap(this.level.enemies);
+        this.addToMap(this.character);
         this.ctx.restore();
         // fix statusbar moving with char 
 
@@ -140,8 +141,8 @@ class World {
         this.character.characterMovement();
         this.character.characterAnimation();
         this.level.enemies.forEach(enemy => {
-            if (enemy.moveStep) enemy.moveStep();
-            if (enemy.animateStep) enemy.animateStep();
+            if (enemy.moveStep) enemy.moveStep(this.character);
+            if (enemy.animateStep) enemy.animateStep(this.character);
         });
         this.level.enemies = this.level.enemies.filter(e => !e.markedForDeletion);
         this.throwableObjects = this.throwableObjects.filter(obj => !obj.markedForDeletion);

@@ -1,7 +1,7 @@
 //#region Chicken
 class Chicken extends MovableObject {
     //#region Attribute Chicken
-    y = 360;
+    y = 350;
     height = 70;
     width = 70;
 

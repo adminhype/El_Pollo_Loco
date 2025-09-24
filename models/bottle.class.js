@@ -1,7 +1,7 @@
 //#region Bottle-Object
 class Bottle extends MovableObject {
     //#region Bottle Attributes
-    y = 380;
+    y = 360;
     width = 50;
     height = 60;
 

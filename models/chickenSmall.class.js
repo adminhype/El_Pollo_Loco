@@ -1,7 +1,7 @@
 //#region Small Cicken
 class ChickenSmall extends MovableObject {
     //#region Attribute Small-Chicken
-    y = 380;
+    y = 370;
     height = 50;
     width = 50;
 

@@ -4,7 +4,7 @@ class DrawableObject {
     img;
     currentImage = 0;
     imageCache = {};
-    x = 120;
+    x = 2220; // fix charachter position later 
     y = 280;
     height = 150;
     width = 100;

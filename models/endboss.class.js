@@ -21,7 +21,7 @@ class Endboss extends MovableObject {
         super().loadImage(this.IMAGES_WALK[0]);
         this.loadImages(this.IMAGES_WALK);
         this.loadImages(this.IMAGES_DEAD);
-        this.x = 2500;
+        this.x = 3000;
 
 
         this.animationCounter = 0;
@@ -34,7 +34,7 @@ class Endboss extends MovableObject {
     //#region Endboss-Animation
     moveStep = () => {
         if (!this.isDead) {
-            this.x -= this.speed;
+            // this.x -= this.speed;
         }
     }
     animateStep = () => {

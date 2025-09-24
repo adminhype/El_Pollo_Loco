@@ -7,7 +7,7 @@ class Level {
     // backgroundObjects;
     // salsaBottles;
     // coins;
-    level_end_x = 2200;
+    level_end_x = 3200;
     //#endregion
     //#region Objects
     enemies = [ // Gegner
@@ -31,31 +31,9 @@ class Level {
         new Cloud(),
         new Cloud(),
     ];
-    backgroundObjects = [ // Hintergründe nach reihenfolge
-        new BackgroundObject('img/5_background/layers/air.png', -719),// bild und koordinaten
-        new BackgroundObject('img/5_background/layers/3_third_layer/2.png', -719),// ↓
-        new BackgroundObject('img/5_background/layers/2_second_layer/2.png', -719),//↓
-        new BackgroundObject('img/5_background/layers/1_first_layer/2.png', -719),// ←
+    backgroundObjects = [];
 
 
-        new BackgroundObject('img/5_background/layers/air.png', 0),// bild und koordinaten
-        new BackgroundObject('img/5_background/layers/3_third_layer/1.png', 0),// ↓
-        new BackgroundObject('img/5_background/layers/2_second_layer/1.png', 0),//↓
-        new BackgroundObject('img/5_background/layers/1_first_layer/1.png', 0),// ←
-        new BackgroundObject('img/5_background/layers/air.png', 719),// bild und koordinaten
-        new BackgroundObject('img/5_background/layers/3_third_layer/2.png', 719),// ↓
-        new BackgroundObject('img/5_background/layers/2_second_layer/2.png', 719),//↓
-        new BackgroundObject('img/5_background/layers/1_first_layer/2.png', 719),// ←
-
-        new BackgroundObject('img/5_background/layers/air.png', 719 * 2),// bild und koordinaten
-        new BackgroundObject('img/5_background/layers/3_third_layer/1.png', 719 * 2),// ↓
-        new BackgroundObject('img/5_background/layers/2_second_layer/1.png', 719 * 2),//↓
-        new BackgroundObject('img/5_background/layers/1_first_layer/1.png', 719 * 2),// ←
-        new BackgroundObject('img/5_background/layers/air.png', 719 * 3), // bild und koordinaten
-        new BackgroundObject('img/5_background/layers/3_third_layer/2.png', 719 * 3),// ↓
-        new BackgroundObject('img/5_background/layers/2_second_layer/2.png', 719 * 3),//↓
-        new BackgroundObject('img/5_background/layers/1_first_layer/2.png', 719 * 3),// ←
-    ];
     salsaBottles = [];
     coins = [];
 
@@ -66,6 +44,14 @@ class Level {
 
         for (let i = 0; i < coinCount; i++) {
             this.coins.push(new Coin());
+        }
+        for (let i = -1; i <= 5; i++) {
+            const type = (i % 2 === 0) ? '1.png' : '2.png';
+
+            this.backgroundObjects.push(new BackgroundObject('img/5_background/layers/air.png', 719 * i));
+            this.backgroundObjects.push(new BackgroundObject(`img/5_background/layers/3_third_layer/${type}`, 719 * i));
+            this.backgroundObjects.push(new BackgroundObject(`img/5_background/layers/2_second_layer/${type}`, 719 * i));
+            this.backgroundObjects.push(new BackgroundObject(`img/5_background/layers/1_first_layer/${type}`, 719 * i));
         }
     }
     //#endregion
