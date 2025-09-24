@@ -18,6 +18,7 @@ class ThrowableObject extends MovableObject {
         this.animationSpeed = 4;
         this.currentFrame = 0;
         this.frameCounter = 0;
+        this.markedForDeletion = false;
 
     }
     //#endregion
@@ -50,6 +51,10 @@ class ThrowableObject extends MovableObject {
         this.speedY = 0;
         this.y = 380;
         this.currentFrame = 0;
+
+        setTimeout(() => {
+            this.markedForDeletion = true;
+        }, 1000);
     }
 }
 //#endregion

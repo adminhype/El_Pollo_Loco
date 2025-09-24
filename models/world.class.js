@@ -7,6 +7,7 @@ class World {
     canvas;
     keyboard;
     camera_x = 0;
+
     statusBar = new StatusBar();
     bottlBar = new BottleBar();
     coinBar = new CoinBar();
@@ -22,7 +23,6 @@ class World {
         this.keyboard = keyboard;
         this.setWorld();
         this.draw();
-        this.checkCollisions();
     }
     //#endregion
 
@@ -32,7 +32,11 @@ class World {
     }
     checkThrowObjects() {
         if (this.character.isSleeping()) return;
-        if (this.keyboard.F && this.bottlBar.percentage > 0) {
+        let now = new Date().getTime();
+        let throwCooldown = 300;
+
+        if (this.keyboard.F && this.bottlBar.percentage > 0 &&
+            (!this.lastThrowTime || now - this.lastThrowTime > throwCooldown)) {
             let offsetX = this.character.width - 20;
             let offsetY = this.character.height / 2;
 
@@ -43,35 +47,58 @@ class World {
 
             this.throwableObjects.push(bottle);
             this.bottlBar.setPercentage(this.bottlBar.percentage - 20);
+            this.lastThrowTime = now;
         }
     }
-
     checkCollisions() {
+        this.checkEnemyCollisions();
+        this.checkBottleCollisions();
+        this.checkCoinCollisions();
+        this.checkThrowableCollisions();
+    }
+
+    checkEnemyCollisions() {
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy) && !this.character.isHurt()) {
+            if (!this.character.isColliding(enemy) || enemy.isDead) return;
+            const feet = this.character.y + this.character.height;
+            const stomp = this.character.speedY < 0 && feet <= enemy.y + enemy.height;
+            if (stomp) {
+                enemy.die();
+            } else if (!this.character.isHurt()) {
                 this.character.hit();
-                this.statusBar.setPercentage(this.character.energy); // change statusbar on collision with enemy
+                this.statusBar.setPercentage(this.character.energy);
             }
         });
-        this.level.salsaBottles.forEach((bottle, index) => {
+    }
+
+    checkBottleCollisions() {
+        this.level.salsaBottles = this.level.salsaBottles.filter((bottle) => {
             if (this.character.isColliding(bottle)) {
-                this.collectedBottles.push(bottle); //show items for end screen
-                this.level.salsaBottles.splice(index, 1);
+                this.collectedBottles.push(bottle);
                 this.bottlBar.setPercentage(Math.min(100, this.bottlBar.percentage + 20));
+                return false;
             }
+            return true;
         });
-        this.level.coins.forEach((coin, index) => {
+    }
+
+    checkCoinCollisions() {
+        this.level.coins = this.level.coins.filter((coin) => {
             if (this.character.isColliding(coin)) {
                 this.collectedCoins.push(coin);
-                this.level.coins.splice(index, 1);
                 this.coinBar.setPercentage(Math.min(100, this.coinBar.percentage + 20));
+                return false;
             }
+            return true;
         });
-        this.throwableObjects.forEach((bottle, i) => {
-            this.level.enemies.forEach((enemy, j) => {
+    }
+
+    checkThrowableCollisions() {
+        this.throwableObjects.forEach((bottle) => {
+            this.level.enemies.forEach((enemy) => {
                 if (bottle.isColliding(enemy) && !enemy.isDead) {
                     enemy.die();
-                    this.throwableObjects.splice(i, 1);
+                    bottle.markedForDeletion = true;
                 }
             });
         });
@@ -81,7 +108,7 @@ class World {
     //#region Render: World and Objects 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
+        this.ctx.save();
         this.ctx.translate(this.camera_x, 0); // move char with camera
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addToMap(this.character);
@@ -90,7 +117,7 @@ class World {
         this.addObjectsToMap(this.throwableObjects);
         this.addObjectsToMap(this.level.salsaBottles);
         this.addObjectsToMap(this.level.coins);
-        this.ctx.translate(-this.camera_x, 0);
+        this.ctx.restore();
         // fix statusbar moving with char 
 
         // this.ctx.translate(-this.camera_x, 0); // back
@@ -117,7 +144,7 @@ class World {
             if (enemy.animateStep) enemy.animateStep();
         });
         this.level.enemies = this.level.enemies.filter(e => !e.markedForDeletion);
-        this.throwableObjects.forEach(obj => obj.update());
+        this.throwableObjects = this.throwableObjects.filter(obj => !obj.markedForDeletion);
     }
     //#region Draw multiply Objects on Canvas
     addObjectsToMap(objects) {

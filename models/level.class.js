@@ -59,7 +59,7 @@ class Level {
     salsaBottles = [];
     coins = [];
 
-    constructor(bottleCount = 100, coinCount = 5) {
+    constructor(bottleCount = 5, coinCount = 5) {
         for (let i = 0; i < bottleCount; i++) {
             this.salsaBottles.push(new Bottle());
         }
