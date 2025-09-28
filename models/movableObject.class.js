@@ -5,7 +5,7 @@ class MovableObject extends DrawableObject {
     otherDirection = false;
     speedY = 0;
     acceleration = 2.3;
-    energy = 1000;
+    energy = 200;
     lastHit = 0;
 
     offset = {
@@ -71,11 +71,10 @@ class MovableObject extends DrawableObject {
     isHurt() {
         let timepassed = new Date().getTime() - this.lastHit // diff in ms
         timepassed = timepassed / 1000; // diff in sec
-        // console.log((timepassed));
         return timepassed < 0.5; // hit under x sec
     }
-    isDead() { // object death ? 
-        return this.energy == 0; // energy 0 > death 
+    isDead() {
+        return this.energy <= 0 || this.dead === true;
     }
     moveRight() {
         this.x += this.speed;

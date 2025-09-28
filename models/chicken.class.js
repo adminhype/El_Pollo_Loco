@@ -28,20 +28,19 @@ class Chicken extends MovableObject {
         this.animationCounter = 0;
         this.animationSpeed = 8;
 
-        this.isDead = false;
-        this.deadFrameIndex = 0;
+        this.dead = false;
     }
     //#endregion
 
     moveStep = () => {
-        if (!this.isDead) {
+        if (!this.isDead()) {
             this.x -= this.speed;
         }
     }
     animateStep = () => {
         this.animationCounter++;
 
-        if (this.isDead) {
+        if (this.isDead()) {
             this.img = this.imageCache[this.IMAGES_DEAD[0]];
 
             if (this.animationCounter > 60) {
@@ -55,7 +54,8 @@ class Chicken extends MovableObject {
     }
 
     die = () => {
-        this.isDead = true;
+        this.Dead = true;
+        this.energy = 0;
         this.speed = 0;
         this.animationCounter = 0;
     }

@@ -28,20 +28,19 @@ class ChickenSmall extends MovableObject {
         this.animationCounter = 0;
         this.animationSpeed = 10;
 
-        this.isDead = false;
-        this.deadFrameIndex = 0;
+        this.dead = false;
     }
     //#endregion
 
     moveStep = () => {
-        if (!this.isDead) {
+        if (!this.isDead()) {
             this.x -= this.speed;
         }
     }
     animateStep = () => {
         this.animationCounter++;
 
-        if (this.isDead) {
+        if (this.isDead()) {
             this.img = this.imageCache[this.IMAGES_DEAD[0]];
 
             if (this.animationCounter > 60) {
@@ -55,7 +54,7 @@ class ChickenSmall extends MovableObject {
     }
 
     die = () => {
-        this.isDead = true;
+        this.dead = true;
         this.speed = 0;
         this.animationCounter = 0;
     }

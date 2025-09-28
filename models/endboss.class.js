@@ -13,6 +13,9 @@ class Endboss extends MovableObject {
     };
 
     IMAGES_WALK = ImageHub.enemieBossChicken.walk;
+    IMAGES_ALERT = ImageHub.enemieBossChicken.alert;
+    IMAGES_ATTACK = ImageHub.enemieBossChicken.attack;
+    IMAGES_HURT = ImageHub.enemieBossChicken.hurt;
     IMAGES_DEAD = ImageHub.enemieBossChicken.dead;
     //#endregion
 
@@ -20,6 +23,9 @@ class Endboss extends MovableObject {
     constructor() {
         super().loadImage(this.IMAGES_WALK[0]);
         this.loadImages(this.IMAGES_WALK);
+        this.loadImages(this.IMAGES_ALERT);
+        this.loadImages(this.IMAGES_ATTACK);
+        this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
         this.x = 3000;
 
@@ -27,35 +33,77 @@ class Endboss extends MovableObject {
         this.animationCounter = 0;
         this.animationSpeed = 15;
 
-        this.isDead = false;
         this.deadFrameIndex = 0;
+        this.energy = 100;
+        this.speed = 4;
+        this.isCurrentlyHurt = false;
+        this.hurtDuration = 500;
+
     }
     //#endregion
     //#region Endboss-Animation
-    moveStep = () => {
-        if (!this.isDead) {
-            // this.x -= this.speed;
+    moveStep = (character) => {
+        if (!this.isDead() && this.isAlert(character)) {
+            if (this.x > character.x) {
+                this.x -= this.speed;
+            } else {
+                this.x += this.speed;
+            }
         }
     }
-    animateStep = () => {
+    animateStep = (character) => {
         this.animationCounter++;
 
-        if (this.isDead) {
-            if (this.animationCounter % this.animationSpeed === 0 && this.deadFrameIndex < this.IMAGES_DEAD.length) {
-                this.img = this.imageCache[this.IMAGES_DEAD[this.deadFrameIndex]];
-                this.deadFrameIndex++;
-            }
-
-            if (this.deadFrameIndex >= this.IMAGES_DEAD.length) {
+        if (this.isDead()) {
+            this.playWithDelay(this.IMAGES_DEAD);
+            setTimeout(() => {
                 this.markedForDeletion = true;
+            }, 2000);
+        }
+        else if (this.isCurrentlyHurt) {
+            this.playWithDelay(this.IMAGES_HURT);
+        }
+        else if (this.isCloseTo(character)) {
+            this.playWithDelay(this.IMAGES_ATTACK);
+        }
+        else if (this.isAlert(character)) {
+            if (this.x !== character.x) {
+                this.playWithDelay(this.IMAGES_WALK);
             }
         }
+        else {
+            this.playWithDelay(this.IMAGES_ALERT);
+        }
+    }
+    playWithDelay(images) {
+        if (this.animationCounter % this.animationSpeed === 0) {
+            this.playAnimation(images);
+        }
+    }
+    isCloseTo(character) {
+        return Math.abs(this.x - character.x) < 150;
+    }
+
+    isAlert(character) {
+        return Math.abs(this.x - character.x) < 400;
     }
 
     die = () => {
-        this.isDead = true;
+        this.energy = 0;
         this.speed = 0;
         this.animationCounter = 0;
+    }
+    takeHit(damage) {
+        this.energy = Math.max(0, this.energy - damage);
+        this.isCurrentlyHurt = true;
+
+        setTimeout(() => {
+            this.isCurrentlyHurt = false;
+        }, this.hurtDuration);
+
+        if (this.energy <= 0) {
+            this.die();
+        }
     }
     //#endregion
 }

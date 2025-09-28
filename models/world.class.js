@@ -11,6 +11,7 @@ class World {
     statusBar = new StatusBar();
     bottlBar = new BottleBar();
     coinBar = new CoinBar();
+    endbossBar = new StatusBarEndboss();
     throwableObjects = [];
     collectedBottles = [];
     collectedCoins = [];
@@ -59,7 +60,15 @@ class World {
 
     checkEnemyCollisions() {
         this.level.enemies.forEach((enemy) => {
-            if (!this.character.isColliding(enemy) || enemy.isDead) return;
+            if (!this.character.isColliding(enemy) || enemy.isDead()) return;
+            if (enemy instanceof Endboss) {
+                if (!this.character.isHurt()) {
+                    this.character.hit();
+                    this.statusBar.setPercentage(this.character.energy);
+                }
+                return;
+            }
+
             const feet = this.character.y + this.character.height;
             const stomp = this.character.speedY < 0 && feet <= enemy.y + enemy.height;
 
@@ -97,8 +106,13 @@ class World {
     checkThrowableCollisions() {
         this.throwableObjects.forEach((bottle) => {
             this.level.enemies.forEach((enemy) => {
-                if (bottle.isColliding(enemy) && !enemy.isDead) {
-                    enemy.die();
+                if (bottle.isColliding(enemy) && !enemy.isDead()) {
+                    if (enemy instanceof Endboss) {
+                        enemy.takeHit(20);
+                        this.endbossBar.setBossEnergy(enemy.energy);
+                    } else {
+                        enemy.die();
+                    }
                     bottle.markedForDeletion = true;
                 }
             });
@@ -125,6 +139,7 @@ class World {
         this.addToMap(this.statusBar);
         this.addToMap(this.bottlBar);
         this.addToMap(this.coinBar);
+        this.addToMap(this.endbossBar)
         // this.ctx.translate(this.camera_x, 0); // forward
         this.update();
         let self = this;
@@ -168,7 +183,7 @@ class World {
             this.flipImage(moObject);
         }
         moObject.draw(this.ctx);
-        moObject.drawFrame(this.ctx);
+        // moObject.drawFrame(this.ctx);
 
         if (moObject.otherDirection) {
             this.flipImageBack(moObject);
