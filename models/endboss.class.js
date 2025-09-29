@@ -81,11 +81,11 @@ class Endboss extends MovableObject {
         }
     }
     isCloseTo(character) {
-        return Math.abs(this.x - character.x) < 150;
+        return Math.abs(this.x - character.x) < 300;
     }
 
     isAlert(character) {
-        return Math.abs(this.x - character.x) < 400;
+        return Math.abs(this.x - character.x) < 500;
     }
 
     die = () => {

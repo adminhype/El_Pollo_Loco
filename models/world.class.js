@@ -36,14 +36,18 @@ class World {
         let now = new Date().getTime();
         let throwCooldown = 300;
 
-        if (this.keyboard.F && this.bottlBar.percentage > 0 &&
+        if (this.keyboard.F &&
+            this.bottlBar.percentage > 0 &&
+            !this.character.otherDirection &&
             (!this.lastThrowTime || now - this.lastThrowTime > throwCooldown)) {
+
             let offsetX = this.character.width - 20;
             let offsetY = this.character.height / 2;
 
             let bottle = new ThrowableObject(
                 this.character.x + offsetX,
                 this.character.y + offsetY,
+                1 // only right throw
             );
 
             this.throwableObjects.push(bottle);
