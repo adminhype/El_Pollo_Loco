@@ -12,8 +12,44 @@
         <title>El Pollo Loco</title>
     </head>
     <body onload="init()">
-        <h1>El Pollo Loco v2</h1>
-        <canvas id="canvas" width="720" height="480"></canvas>
+        <div class="game-container">
+            <canvas id="canvas" width="720" height="480"></canvas>
+
+            <!-- Start Screen (only img) -->
+            <div class="screen d-flex" id="start">
+            <img src="img/9_intro_outro_screens/start/startscreen_1.png" alt="Start Screen" class="screen-img cover">
+            </div>
+
+            <!-- Game Over -->
+            <div class="screen d-none" id="gameover">
+            <img src="img/win_lose/game_over.png" alt="Game Over" class="screen-img contain">
+            </div>
+
+            <!-- Win -->
+            <div class="screen d-none" id="win">
+            <img src="img/win_lose/you_win.png" alt="You Win" class="screen-img contain">
+            </div>
+
+        <!-- Buttons under canvas -->
+        <div class="controls" id="controls">
+            <!-- Start -->
+            <div id="start-buttons" class="button-group d-flex">
+                <button onclick="startGame('start', 'start-buttons')" id="start-game">Start Game</button>
+            </div>
+
+            <!-- Game Over -->
+            <div id="gameover-buttons" class="button-group d-none">
+                <button onclick="startGame('gameover', 'gameover-buttons')" id="try-again">Try Again</button>
+                <button onclick="showStartScreen('gameover', 'gameover-buttons')" id="back-to-menu">Back to Menu</button>
+            </div>
+
+            <!-- Win -->
+            <div id="win-buttons" class="button-group d-none">
+                <button onclick="startGame('win', 'win-buttons')" id="play-again">Play Again</button>
+                <button onclick="showStartScreen('win', 'win-buttons')" id="back-to-menu">Back to Menu</button>
+            </div>
+        </div>
+    </div>
         <!-- Asset-Hub -->
         <script src="./models/hubs.js"></script>
 

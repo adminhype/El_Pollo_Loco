@@ -7,6 +7,7 @@ class World {
     canvas;
     keyboard;
     camera_x = 0;
+    isRunning = true;
 
     statusBar = new StatusBar();
     bottlBar = new BottleBar();
@@ -122,10 +123,28 @@ class World {
             });
         });
     }
+    gameOver() {
+        this.isRunning = false;
+        document.getElementById("gameover").classList.remove("d-none");
+        document.getElementById("gameover").classList.add("d-flex");
+
+        document.getElementById("gameover-buttons").classList.remove("d-none");
+        document.getElementById("gameover-buttons").classList.add("d-flex");
+    }
+
+    winGame() {
+        this.isRunning = false;
+        document.getElementById("win").classList.remove("d-none");
+        document.getElementById("win").classList.add("d-flex");
+
+        document.getElementById("win-buttons").classList.remove("d-none");
+        document.getElementById("win-buttons").classList.add("d-flex");
+    }
     //#endregion
 
     //#region Render: World and Objects 
     draw() {
+        if (!this.isRunning) return;
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.save();
         this.ctx.translate(this.camera_x, 0); // move char with camera
@@ -165,6 +184,14 @@ class World {
         });
         this.level.enemies = this.level.enemies.filter(e => !e.markedForDeletion);
         this.throwableObjects = this.throwableObjects.filter(obj => !obj.markedForDeletion);
+
+        if (this.character.energy <= 0 && this.isRunning) {
+            this.gameOver();
+        }
+        const endboss = this.level.enemies.find(e => e instanceof Endboss);
+        if ((!endboss || endboss.energy <= 0) && this.isRunning) {
+            this.winGame();
+        }
     }
     //#region Draw multiply Objects on Canvas
     addObjectsToMap(objects) {

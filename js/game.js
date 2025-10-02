@@ -2,13 +2,46 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+const worlds = [];
 //#endregion
 
 //#region Get and store DOM elements (canvas).
 function init() {
     canvas = document.getElementById('canvas');
-    world = new World(canvas, keyboard);
-    console.log('my character is', world.character);
+    console.log("warte auf game start");
+}
+function startGame(screenID, buttonID) {
+    canvas = document.getElementById("canvas");
+    resetGameState();
+    if (worlds.length === 0) {
+        worlds.push(new World(canvas, keyboard));
+    }
+    makeScreenInvisible(screenID, buttonID);
+}
+
+function resetGameState() {
+    if (worlds.length === 1) {
+        worlds.splice(0, 1, new World(canvas, keyboard));
+    }
+}
+function makeScreenInvisible(screenID, buttonGroupID) {
+    const screenRef = document.getElementById(screenID);
+    const buttonGroupRef = document.getElementById(buttonGroupID);
+
+    screenRef.classList.add("d-none");
+    screenRef.classList.remove("d-flex");
+    buttonGroupRef.classList.add("d-none");
+    buttonGroupRef.classList.remove("d-flex");
+}
+
+function showStartScreen(screenID, buttonGroupID) {
+    makeScreenInvisible(screenID, buttonGroupID);
+
+    document.getElementById("start").classList.remove("d-none");
+    document.getElementById("start").classList.add("d-flex");
+
+    document.getElementById("start-buttons").classList.remove("d-none");
+    document.getElementById("start-buttons").classList.add("d-flex");
 }
 //#endregion
 //#region Register keyboard events for gameplay.
