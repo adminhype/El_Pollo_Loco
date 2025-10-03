@@ -22,7 +22,7 @@ class Chicken extends MovableObject {
         super().loadImage(this.IMAGES_WALK[0]);
         this.loadImages(this.IMAGES_WALK);
         this.loadImages(this.IMAGES_DEAD);
-        this.x = 200 + Math.random() * 2000;
+        this.x = 470 + Math.random() * 2500;
         this.speed = 0.2 + Math.random() * 0.25;
 
         this.animationCounter = 0;
@@ -42,7 +42,6 @@ class Chicken extends MovableObject {
 
         if (this.isDead()) {
             this.img = this.imageCache[this.IMAGES_DEAD[0]];
-
             if (this.animationCounter > 60) {
                 this.markedForDeletion = true;
             }
@@ -54,9 +53,10 @@ class Chicken extends MovableObject {
     }
 
     die = () => {
-        this.Dead = true;
+        this.dead = true;
         this.energy = 0;
         this.speed = 0;
         this.animationCounter = 0;
+        SoundHub.play("chickenDead");
     }
 }

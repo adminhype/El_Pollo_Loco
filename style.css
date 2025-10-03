@@ -87,7 +87,6 @@ button {
     padding: 0.5rem 1rem;
     border-radius: 8px;
     background: #000000b4;
-    text-shadow: 2px 2px 4px #000;
     color: #ffa700;
     cursor: pointer;
     letter-spacing: 2px;
@@ -96,4 +95,19 @@ button {
 button:hover {
     color: #903717;
     transform: scale(1.05);
+}
+#sound-control {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 20;
+}
+#toggle-sound {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+#toggle-sound:hover {
+    transform: scale(1.1);
 }

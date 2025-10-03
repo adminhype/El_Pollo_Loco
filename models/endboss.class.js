@@ -54,6 +54,7 @@ class Endboss extends MovableObject {
     animateStep = (character) => {
         this.animationCounter++;
 
+
         if (this.isDead()) {
             this.playWithDelay(this.IMAGES_DEAD);
             setTimeout(() => {
@@ -96,6 +97,7 @@ class Endboss extends MovableObject {
     takeHit(damage) {
         this.energy = Math.max(0, this.energy - damage);
         this.isCurrentlyHurt = true;
+        SoundHub.play("chickenDead2");
 
         setTimeout(() => {
             this.isCurrentlyHurt = false;

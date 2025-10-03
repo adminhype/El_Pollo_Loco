@@ -7,10 +7,11 @@ const worlds = [];
 
 //#region Get and store DOM elements (canvas).
 function init() {
+    SoundHub.init();
     canvas = document.getElementById('canvas');
-    console.log("warte auf game start");
 }
 function startGame(screenID, buttonID) {
+    SoundHub.play("background");
     canvas = document.getElementById("canvas");
     resetGameState();
     if (worlds.length === 0) {

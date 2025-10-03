@@ -13,6 +13,7 @@ class Character extends MovableObject {
     };
     SLEEP_DELAY = 2;
     JUMP_FRAME_DELAY = 200;
+    isSnoring = false;
 
     IMAGES_IDLE = ImageHub.pepe.idle;
     IMAGES_WALK = ImageHub.pepe.walk;
@@ -45,6 +46,7 @@ class Character extends MovableObject {
     //#region pepe animation
     jump() {
         this.speedY = 25;
+        SoundHub.play("jump");
     }
     characterMovement() {
         let moved = false;
@@ -53,18 +55,22 @@ class Character extends MovableObject {
             this.moveRight();
             this.otherDirection = false;
             moved = true;
-            // this.WALKING_SOUND.play();
         }
         if (this.world.keyboard.LEFT && this.x > 0) {
             this.moveLeft();
             this.otherDirection = true;
             moved = true;
-            // this.WALKING_SOUND.play();
         }
         if (this.world.keyboard.SPACE && !this.isAboveGround()) {
             this.jump();
             moved = true;
         }
+        if (moved && !this.isAboveGround()) {
+            SoundHub.startLoop("footstep");
+        } else {
+            SoundHub.stopLoop("footstep");
+        }
+
         if (moved) this.lastAction = this.getNow();
         this.world.camera_x = -this.x + 100;
     }
@@ -98,7 +104,17 @@ class Character extends MovableObject {
 
     isSleeping() {
         let idleTime = (this.getNow() - this.lastAction) / 1000;
-        return idleTime > this.SLEEP_DELAY; // start sleep after 2sec
+        let sleeping = idleTime > this.SLEEP_DELAY;
+
+        if (sleeping && !this.isSnoring) {
+            SoundHub.startLoop("snoring");
+            this.isSnoring = true;
+        }
+        if (!sleeping && this.isSnoring) {
+            SoundHub.stopLoop("snoring");
+            this.isSnoring = false;
+        }
+        return sleeping;
     }
     //#endregion
 }

@@ -91,6 +91,7 @@ class World {
             if (this.character.isColliding(bottle)) {
                 this.collectedBottles.push(bottle);
                 this.bottlBar.setPercentage(Math.min(100, this.bottlBar.percentage + 20));
+                SoundHub.play("bottleCollect");
                 return false;
             }
             return true;
@@ -102,7 +103,9 @@ class World {
             if (this.character.isColliding(coin)) {
                 this.collectedCoins.push(coin);
                 this.coinBar.setPercentage(Math.min(100, this.coinBar.percentage + 20));
+                SoundHub.play("coin");
                 return false;
+
             }
             return true;
         });
@@ -125,6 +128,9 @@ class World {
     }
     gameOver() {
         this.isRunning = false;
+        SoundHub.stopLoop("footstep");
+        SoundHub.play("gameover");
+
         document.getElementById("gameover").classList.remove("d-none");
         document.getElementById("gameover").classList.add("d-flex");
 
@@ -134,6 +140,9 @@ class World {
 
     winGame() {
         this.isRunning = false;
+        SoundHub.stopLoop("footstep");
+        SoundHub.play("win");
+
         document.getElementById("win").classList.remove("d-none");
         document.getElementById("win").classList.add("d-flex");
 
@@ -189,7 +198,7 @@ class World {
             this.gameOver();
         }
         const endboss = this.level.enemies.find(e => e instanceof Endboss);
-        if ((!endboss || endboss.energy <= 0) && this.isRunning) {
+        if (!endboss && this.isRunning) {
             this.winGame();
         }
     }

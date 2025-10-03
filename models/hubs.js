@@ -305,4 +305,99 @@ class IntervalHub {
 //#endregion
 
 //#region Sounds
+class SoundHub {
+    static sounds = {
+        background: new Audio("audio/background-music.mp3"),
+        footstep: new Audio("audio/footstep.mp3"),
+        jump: new Audio("audio/jump.mp3"),
+        coin: new Audio("audio/coin.mp3"),
+        bottle: new Audio("audio/break-bottle.mp3"),
+        hurt: new Audio("audio/hurt.mp3"),
+        death: new Audio("audio/death.mp3"),
+        gameover: new Audio("audio/game-over.mp3"),
+        win: new Audio("audio/level-finished.mp3"),
+        chickenDead: new Audio("audio/chickenDead.mp3"),
+        chickenDead2: new Audio("audio/chickenDead2.mp3"),
+        bottleCollect: new Audio("audio/bottleCollectSound.wav"),
+        snoring: new Audio("audio/characterSnoring.mp3"),
+    };
+
+    static muted = false;
+
+    static init() {
+        this.sounds.background.loop = true;
+        this.sounds.background.volume = 0.1;
+
+        this.sounds.footstep.loop = true;
+        this.sounds.footstep.volume = 0.6;
+        this.sounds.jump.volume = 0.1;
+        this.sounds.coin.volume = 0.1;
+        this.sounds.bottle.volume = 0.1;
+        this.sounds.hurt.volume = 0.1;
+        this.sounds.death.volume = 0.1;
+        this.sounds.gameover.volume = 1.0;
+        this.sounds.win.volume = 1.0;
+        this.sounds.chickenDead.volume = 0.3;
+        this.sounds.chickenDead2.volume = 0.3;
+        this.sounds.bottleCollect.volume = 0.2;
+        this.sounds.snoring.volume = 0.2;
+        this.loadSoundSetting();
+    }
+    static loadSoundSetting() {
+        const savedMuted = localStorage.getItem("soundMuted");
+        if (savedMuted !== null) {
+            this.muted = savedMuted === "true";
+        }
+        this.updateIcon();
+    }
+    static saveSoundSetting() {
+        localStorage.setItem("soundMuted", this.muted);
+    }
+
+
+    static play(name) {
+        if (!this.muted && this.sounds[name]) {
+            let sound = this.sounds[name];
+            sound.currentTime = 0;
+            sound.play();
+        }
+    }
+
+    static startLoop(name) {
+        if (!this.muted && this.sounds[name]) {
+            let sound = this.sounds[name];
+            if (sound.paused) {
+                sound.play();
+            }
+        }
+    }
+
+    static stopLoop(name) {
+        if (this.sounds[name]) {
+            this.sounds[name].pause();
+            this.sounds[name].currentTime = 0;
+        }
+    }
+    static toggleMute() {
+        this.muted = !this.muted;
+
+        if (this.muted) {
+            Object.values(this.sounds).forEach(sound => {
+                if (sound instanceof Audio) sound.pause();
+            });
+        } else {
+            this.sounds.background.play();
+        }
+        this.updateIcon();
+        this.saveSoundSetting();
+    }
+    static updateIcon() {
+        const btn = document.getElementById("toggle-sound");
+        if (btn) {
+            btn.src = this.muted
+                ? "img/sound-off.png"
+                : "img/sound_on.png";
+        }
+    }
+}
 //#endregion

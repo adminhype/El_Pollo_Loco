@@ -51,7 +51,7 @@ class ThrowableObject extends MovableObject {
         this.speedY = 0;
         this.y = 380;
         this.currentFrame = 0;
-
+        SoundHub.play("bottle");
         setTimeout(() => {
             this.markedForDeletion = true;
         }, 1000);

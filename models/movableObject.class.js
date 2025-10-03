@@ -66,6 +66,10 @@ class MovableObject extends DrawableObject {
             this.energy = 0;
         } else {
             this.lastHit = new Date().getTime(); // save time in numbers
+            SoundHub.play("hurt");
+        }
+        if (this.energy <= 0) {
+            SoundHub.play("death");
         }
     }
     isHurt() {
