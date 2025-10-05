@@ -45,6 +45,24 @@ function showStartScreen(screenID, buttonGroupID) {
     document.getElementById("start-buttons").classList.add("d-flex");
 }
 //#endregion
+document.addEventListener('DOMContentLoaded', () => {
+    const overlay = document.getElementById('info-overlay');
+    const openBtn = document.getElementById('info-btn');
+    const closeBtn = document.getElementById('close-overlay');
+
+    openBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        overlay.classList.remove('d-none');
+    });
+
+    closeBtn.addEventListener('click', () => {
+        overlay.classList.add('d-none');
+    });
+
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) overlay.classList.add('d-none');
+    });
+});
 //#region Register keyboard events for gameplay.
 document.addEventListener('keydown', (e) => {
 

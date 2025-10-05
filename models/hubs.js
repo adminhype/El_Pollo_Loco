@@ -395,8 +395,8 @@ class SoundHub {
         const btn = document.getElementById("toggle-sound");
         if (btn) {
             btn.src = this.muted
-                ? "img/sound-off.png"
-                : "img/sound_on.png";
+                ? "img/sound/sound-off.png"
+                : "img/sound/sound_on.png";
         }
     }
 }

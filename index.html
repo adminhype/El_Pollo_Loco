@@ -14,7 +14,13 @@
     <body onload="init()">
         <div class="game-container">
             <canvas id="canvas" width="720" height="480"></canvas>
-
+        <div id="sound-control" class="button-group d-flex">
+            <img id="toggle-sound" 
+                src="img/sound/sound_on.png" 
+                alt="Sound" 
+                onclick="SoundHub.toggleMute()" 
+            />
+        </div>
             <!-- Start Screen (only img) -->
             <div class="screen d-flex" id="start">
             <img src="img/9_intro_outro_screens/start/startscreen_1.png" alt="Start Screen" class="screen-img cover">
@@ -50,15 +56,62 @@
             </div>
         </div>
     </div>
-    
-    <div id="sound-control" class="button-group d-flex">
-        <img id="toggle-sound" 
-            src="img/sound_on.png" 
-            alt="Sound" 
-            onclick="SoundHub.toggleMute()" 
-        />
+    <div class="control-hub">
+    <div class="keybindings">
+        <h3>How to play</h3>
+        <ul>
+            <li>Move:<strong>← / →</strong></li>
+            <li>Jump:<strong>SPACE</strong></li>
+            <li>Throw Bottle:<strong>F</strong></li>
+        </ul>
     </div>
+    <a href="#" id="info-btn">Impressum</a>
+</div>
 
+<!-- Impressum / Legal Notice Overlay -->
+<div id="info-overlay" class="overlay d-none">
+    <div class="overlay-content">
+        <span id="close-overlay" class="close-btn">&times;</span>
+        <h2>Legal Notice</h2>
+
+        <h3>Provider</h3>
+        <p>
+            <strong>Name:</strong> Max Mustermann<br />
+            <strong>Address:</strong> Musterstraße 12, 12345 Musterstadt, Germany<br />
+            <strong>Contact:</strong><br />
+            Phone: +49 (0) 123 456789<br />
+            Email: <a href="mailto:max@example.com">max@example.com</a>
+        </p>
+
+        <h3>Responsible According to § 55 Abs. 2 RStV</h3>
+        <p>
+            Max Mustermann<br />
+            Musterstraße 12<br />
+            12345 Musterstadt, Germany
+        </p>
+
+        <h3>Disclaimer</h3>
+        <p>
+            This project is intended solely for educational and demonstration purposes.
+            It is not used for commercial profit. Despite careful content control, no
+            liability is assumed for external links. The operators of the linked pages
+            are solely responsible for their content.
+        </p>
+
+        <h3>Copyright</h3>
+        <p>
+            All graphics, sounds, and source code used in this game are either created
+            by the developer or are free-to-use assets for educational projects.
+            Commercial use or redistribution is prohibited.
+        </p>
+
+        <h3>Privacy</h3>
+        <p>
+            This game does not collect, store, or process any personal data.
+            No cookies or tracking tools are used.
+        </p>
+    </div>
+</div>
         <!-- Asset-Hub -->
         <script src="./models/hubs.js"></script>
 

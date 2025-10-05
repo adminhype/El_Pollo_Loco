@@ -66,7 +66,7 @@ canvas {
 
 .screen-img.contain {
     object-fit: contain;
-    background-color: #000000b4;
+    background-color: #0D0D12CC;
 }
 .controls {
     margin-top: 15px;
@@ -86,14 +86,14 @@ button {
     font-size: 1.2rem;
     padding: 0.5rem 1rem;
     border-radius: 8px;
-    background: #000000b4;
-    color: #ffa700;
+    background: #0D0D12CC;
+    color: #E6B35A;
     cursor: pointer;
     letter-spacing: 2px;
 }
 
 button:hover {
-    color: #903717;
+    color: #C47A37;
     transform: scale(1.05);
 }
 #sound-control {
@@ -102,12 +102,157 @@ button:hover {
     right: 10px;
     z-index: 20;
 }
+
 #toggle-sound {
     width: 40px;
     height: 40px;
     border-radius: 8px;
     cursor: pointer;
 }
+
 #toggle-sound:hover {
     transform: scale(1.1);
+}
+.control-hub {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 700px;
+    background: #0D0D12CC;
+    border-radius: 8px;
+    padding: 10px 20px;
+    color: #E6B35A;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    box-shadow: 0 0 25px #FFA600;
+    z-index: 11;
+}
+
+.keybindings h3 {
+    font-size: 1.1rem;
+}
+
+.keybindings ul {
+    list-style: none;
+    font-size: 1rem;
+    line-height: 1.4;
+}
+.keybindings li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.keybindings li strong {
+    margin-left: 2rem;
+    color: #EDE3C7;
+    font-size: 1.1rem;
+}
+
+
+#info-btn {
+    color: #EDE3C7;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+#info-btn:hover {
+    color: #C47A37;
+    transform: scale(1.05);
+}
+.overlay .overlay-content * {
+    font-family: Arial, Helvetica, sans-serif;  
+}
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: #0D0D12CC;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.overlay:not(.d-none) {
+    display: flex;
+}
+
+.overlay-content {
+    background: #1E1F24;
+    color: #E6B35A;
+    padding: 30px 40px;
+    border-radius: 12px;
+    width: 720px;
+    max-width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    animation: fadeIn 0.3s ease;
+}
+
+.overlay-content h2 {
+    text-align: center;
+    color: #F7D87C;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+}
+
+.overlay-content h3 {
+    margin-top: 1rem;
+    color: #ffd966;
+    font-size: 1.2rem;
+}
+
+.overlay-content p {
+    line-height: 1.6;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.overlay-content a {
+    color: #F7D87C;
+    text-decoration: none;
+}
+
+.overlay-content a:hover {
+    text-decoration: underline;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 2rem;
+    color: #E6B35A;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.close-btn:hover {
+    color: #C47A37;
+    transform: scale(1.15);
+}
+
+.overlay-content::-webkit-scrollbar {
+    width: 8px;
+}
+.overlay-content::-webkit-scrollbar-thumb {
+    background-color: #E6B35A;
+    border-radius: 4px;
+}
+.overlay-content::-webkit-scrollbar-track {
+    background: #FFFFFF1A;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
