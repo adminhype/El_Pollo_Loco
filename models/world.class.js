@@ -126,6 +126,7 @@ class World {
             });
         });
     }
+
     gameOver() {
         this.isRunning = false;
         SoundHub.stopLoop("footstep");
@@ -229,12 +230,14 @@ class World {
             this.flipImageBack(moObject);
         }
     }
+
     flipImage(moObject) {
         this.ctx.save();
         this.ctx.translate(moObject.width, 0);
         this.ctx.scale(-1, 1);
         moObject.x = moObject.x * -1;
     }
+
     flipImageBack(moObject) {
         moObject.x = moObject.x * -1;
         this.ctx.restore();

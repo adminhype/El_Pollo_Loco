@@ -18,6 +18,12 @@ function startGame(screenID, buttonID) {
         worlds.push(new World(canvas, keyboard));
     }
     makeScreenInvisible(screenID, buttonID);
+    const mobileControls = document.getElementById('mobile-controls');
+    if (mobileControls) {
+        mobileControls.classList.add('active');
+    }
+    const infoBtn = document.getElementById('info-btn');
+    if (infoBtn) infoBtn.style.display = 'none';
 }
 
 function resetGameState() {
@@ -43,6 +49,12 @@ function showStartScreen(screenID, buttonGroupID) {
 
     document.getElementById("start-buttons").classList.remove("d-none");
     document.getElementById("start-buttons").classList.add("d-flex");
+    const mobileControls = document.getElementById('mobile-controls');
+    if (mobileControls) {
+        mobileControls.classList.remove('active');
+    }
+    const infoBtn = document.getElementById('info-btn');
+    if (infoBtn) infoBtn.style.display = 'flex';
 }
 //#endregion
 document.addEventListener('DOMContentLoaded', () => {
@@ -62,6 +74,24 @@ document.addEventListener('DOMContentLoaded', () => {
     overlay.addEventListener('click', (e) => {
         if (e.target === overlay) overlay.classList.add('d-none');
     });
+
+    const btnLeft = document.getElementById('btn-left');
+    const btnRight = document.getElementById('btn-right');
+    const btnUp = document.getElementById('btn-up');
+    const btnThrow = document.getElementById('btn-throw');
+    const mobileControls = document.getElementById('mobile-controls');
+
+    if (btnLeft && btnRight && btnUp && btnThrow && mobileControls) {
+        btnLeft.addEventListener('touchstart', () => keyboard.LEFT = true, { passive: false });
+        btnLeft.addEventListener('touchend', () => keyboard.LEFT = false, { passive: false });
+        btnRight.addEventListener('touchstart', () => keyboard.RIGHT = true, { passive: false });
+        btnRight.addEventListener('touchend', () => keyboard.RIGHT = false, { passive: false });
+        btnUp.addEventListener('touchstart', () => keyboard.SPACE = true, { passive: false });
+        btnUp.addEventListener('touchend', () => keyboard.SPACE = false, { passive: false });
+        btnThrow.addEventListener('touchstart', () => keyboard.F = true, { passive: false });
+        btnThrow.addEventListener('touchend', () => keyboard.F = false, { passive: false });
+        mobileControls.addEventListener('contextmenu', (e) => e.preventDefault());
+    }
 });
 //#region Register keyboard events for gameplay.
 document.addEventListener('keydown', (e) => {
@@ -107,3 +137,17 @@ document.addEventListener('keyup', (e) => {
     }
 });
 //#endregion
+console.log(`
+              A           
+             AAA          
+            AAAAA         
+           AAA AAA        
+          AAA   AAA       
+         AAA     AAA
+        AAAAAAAAAAAAA
+       AAA         AAA    
+      AAA           AAA   
+     AAA             AAA
+     
+    “The journey is the reward.” – Confucius          
+`);

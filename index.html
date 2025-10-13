@@ -7,13 +7,34 @@
         <link
             rel="icon"
             type="image/x-icon"
-            href="/img/7_statusbars/3_icons/icon_coin.png"
+            href="../El_Pollo_Loco/img/8_coin/coin_1.png"
         />
         <title>El Pollo Loco</title>
     </head>
     <body onload="init()">
         <div class="game-container">
             <canvas id="canvas" width="720" height="480"></canvas>
+        
+            <div class="mobile-controls" id="mobile-controls">
+            <div class="left-controls">
+                <button id="btn-left">
+                <img src="img/10_controls/arrow_left_v2.png" alt="Left">
+                </button>
+                <button id="btn-right">
+                <img src="img/10_controls/arrow_right_v2.png" alt="Right">
+                </button>
+            </div>
+
+            <div class="right-controls">
+                <button id="btn-up">
+                <img src="img/10_controls/top_arrow_v2.png" alt="Jump">
+                </button>
+                <button id="btn-throw">
+                <img src="img/10_controls/bottle_btn.png" alt="Throw">
+                </button>
+            </div>
+            </div>
+
         <div id="sound-control" class="button-group d-flex">
             <img id="toggle-sound" 
                 src="img/sound/sound_on.png" 
@@ -35,9 +56,8 @@
             <div class="screen d-none" id="win">
             <img src="img/win_lose/you_win.png" alt="You Win" class="screen-img contain">
             </div>
-
-        <!-- Buttons under canvas -->
-        <div class="controls" id="controls">
+                    <!-- Buttons under canvas -->
+        <div class="controls">
             <!-- Start -->
             <div id="start-buttons" class="button-group d-flex">
                 <button onclick="startGame('start', 'start-buttons')" id="start-game">Start Game</button>
@@ -55,39 +75,41 @@
                 <button onclick="showStartScreen('win', 'win-buttons')" id="back-to-menu">Back to Menu</button>
             </div>
         </div>
+
+<!-- Impressum-Button -->
+<button id="info-btn">Impressum</button>
     </div>
+
     <div class="control-hub">
-    <div class="keybindings">
-        <h3>How to play</h3>
-        <ul>
+        <div class="keybindings">
+            <h3>How to play</h3>
+            <ul>
             <li>Move:<strong>← / →</strong></li>
             <li>Jump:<strong>SPACE</strong></li>
             <li>Throw Bottle:<strong>F</strong></li>
-        </ul>
+            </ul>
+        </div>
+        
+        <div class="game-rules">
+            <h3>Game Rules</h3>
+            <ul>
+            <li>Collect bottles to fight</li>
+            <li>Need <strong>5+ bottles</strong> for Endboss</li>
+            <li>Endboss can only be killed with bottles</li>
+            </ul>
+        </div>
     </div>
-    <a href="#" id="info-btn">Impressum</a>
-</div>
 
 <!-- Impressum / Legal Notice Overlay -->
 <div id="info-overlay" class="overlay d-none">
     <div class="overlay-content">
         <span id="close-overlay" class="close-btn">&times;</span>
-        <h2>Legal Notice</h2>
 
+        <h2>Legal Notice</h2>
         <h3>Provider</h3>
         <p>
-            <strong>Name:</strong> Max Mustermann<br />
-            <strong>Address:</strong> Musterstraße 12, 12345 Musterstadt, Germany<br />
-            <strong>Contact:</strong><br />
-            Phone: +49 (0) 123 456789<br />
-            Email: <a href="mailto:max@example.com">max@example.com</a>
-        </p>
-
-        <h3>Responsible According to § 55 Abs. 2 RStV</h3>
-        <p>
-            Max Mustermann<br />
-            Musterstraße 12<br />
-            12345 Musterstadt, Germany
+            <strong>Name:</strong> Adem Oencue<br />
+            Email: <a href="mailto:dev@ademoencue.de">dev@ademoencue.de</a>
         </p>
 
         <h3>Disclaimer</h3>
@@ -112,6 +134,11 @@
         </p>
     </div>
 </div>
+
+    <div id="rotate-warning" class="rotate-warning d-none">
+        <p>Turn your device to play!</p>
+    </div>
+    
         <!-- Asset-Hub -->
         <script src="./models/hubs.js"></script>
 
@@ -144,6 +171,6 @@
         <script src="./models/world.class.js"></script>
 
         <!-- Game-->
-        <script src="./js/game.js"></script>
+        <script src="./js/game.js" defer></script>
     </body>
 </html>

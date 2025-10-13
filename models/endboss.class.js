@@ -28,11 +28,8 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
         this.x = 3000;
-
-
         this.animationCounter = 0;
         this.animationSpeed = 15;
-
         this.deadFrameIndex = 0;
         this.energy = 100;
         this.speed = 4;
@@ -53,8 +50,6 @@ class Endboss extends MovableObject {
     }
     animateStep = (character) => {
         this.animationCounter++;
-
-
         if (this.isDead()) {
             this.playWithDelay(this.IMAGES_DEAD);
             setTimeout(() => {

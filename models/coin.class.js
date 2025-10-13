@@ -1,7 +1,6 @@
 //#region Coin
 class Coin extends MovableObject {
     //#endregion
-
     //#region Coin Attribute
     y = 180;
     width = 100;

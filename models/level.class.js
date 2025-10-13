@@ -32,8 +32,6 @@ class Level {
         new Cloud(),
     ];
     backgroundObjects = [];
-
-
     salsaBottles = [];
     coins = [];
 
